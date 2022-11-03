@@ -1,0 +1,26 @@
+﻿using Xunit;
+using Moq;
+using Shift4;
+using Shift4.Internal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Shift4Tests.Units
+{
+        public class SignServiceTests
+    {
+        [Fact]
+        public void SignTest()
+        {
+            var mock = new Mock<ISecretKeyProvider>();
+            mock.Setup(provider => provider.GetSecretKey()).Returns("pr_test_tXHm9qV9qV9bjIRHcQr9PLPa");
+            var subject = new SignService(mock.Object);
+            var stringToSign = "{\"charge\":{\"amount\":499,\"currency\":\"EUR\"}}";
+            var signature = subject.Sign(stringToSign);
+            Assert.Equal("cf9ce2d8331c531f8389a616a18f9578c134b784dab5cb7e4b5964e7790f173c", signature);
+        }
+    }
+}

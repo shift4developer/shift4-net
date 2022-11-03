@@ -1,0 +1,10 @@
+packages
+/Shift4/obj
+bin
+obj
+.project
+/TestResults/
+*.suo
+*.user
+.env
+.idea

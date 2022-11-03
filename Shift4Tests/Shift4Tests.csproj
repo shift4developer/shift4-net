@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0"/>
+
+    <PackageReference Include="DotNetEnv" Version="2.2.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.0.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="TestUploadFiles/img.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App.config"/>
+    <None Include="TestUploadFiles/test.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shift4\Shift4.csproj">
+      <Project>{9318d796-2a9c-4313-9d14-9c5d3e215c31}</Project>
+      <Name>Shift4</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
