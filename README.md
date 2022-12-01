@@ -4,7 +4,7 @@
 
 If you don't already have Shift4 account you can create it [here](https://dev.shift4.com/signup). 
 
-## Instalation 
+## Installation 
 
 ### NuGet
 

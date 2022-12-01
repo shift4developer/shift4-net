@@ -80,7 +80,7 @@ namespace Shift4Tests.Units
         }
 
         [Fact]
-        public async Task RetrierveCrossSaleOfferTest()
+        public async Task RetrieveCrossSaleOfferTest()
         {
             var requestTester = GetRequestTester();
             var offerId = "1";

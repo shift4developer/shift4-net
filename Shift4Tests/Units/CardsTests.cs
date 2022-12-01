@@ -63,7 +63,7 @@ namespace Shift4Tests.Units
             var requestTester = GetRequestTester();
             var customerId = "1";
             var cardId = "1";
-            var cardUpdateRequest = new CardUpdateRequest() {CardholderName="Jan Kowaslki",CustomerId= customerId ,CardId=cardId};
+            var cardUpdateRequest = new CardUpdateRequest() {CardholderName="Jan Kowalski",CustomerId= customerId ,CardId=cardId};
             await requestTester.TestMethod<Card>(
                 async (api) =>
                 {

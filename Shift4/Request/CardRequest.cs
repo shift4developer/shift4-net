@@ -8,7 +8,7 @@ namespace Shift4.Request
     public class CardRequest : BaseRequest
     {
         /// <summary>
-        /// Id of exisiting card, card token or charge id when used in ChargeCustomer.
+        /// Id of existing card, card token or charge id when used in ChargeCustomer.
         /// Should be empty when requesting for new card
         [JsonProperty("id")]
         public String Id { get; set; }

@@ -24,43 +24,43 @@ namespace Shift4Tests.Units
         [Fact]
         public async Task CreateFingerprintBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.Fingerprint, Fingerprint = "test_fp" + DateTime.Now.Millisecond });
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.Fingerprint, Fingerprint = "test_fp" + DateTime.Now.Millisecond });
         }
 
         [Fact]
         public async Task CreateEmailBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.Email, Email = "test" + DateTime.Now.Millisecond + "@example.com" });
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.Email, Email = "test" + DateTime.Now.Millisecond + "@example.com" });
         }
 
         [Fact]
         public async Task CreateLanguageBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.AcceptLanguage, AcceptLanguage = "test" + DateTime.Now.Millisecond});
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.AcceptLanguage, AcceptLanguage = "test" + DateTime.Now.Millisecond});
         }
 
         [Fact]
         public async Task CreateIpBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.IpAddress, IpAddress = "192.168.11.1" });
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.IpAddress, IpAddress = "192.168.11.1" });
         }
 
         [Fact]
         public async Task CreateIpCountryBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.IpCountry, IpCountry = "PL" });
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.IpCountry, IpCountry = "PL" });
         }
 
         [Fact]
         public async Task CreateMetadataBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.Metadata, MetadataKey = "key",MetadataValue="value" });
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.Metadata, MetadataKey = "key",MetadataValue="value" });
         }
 
         [Fact]
         public async Task CreateUserAgentBlackListTest()
         {
-            await CreatelBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.UserAgent, IpCountry = "UA" });
+            await CreateBlackListTest(new BlacklistRuleRequest() { RuleType = BlacklistRuleType.UserAgent, IpCountry = "UA" });
         }
 
 
@@ -122,7 +122,7 @@ namespace Shift4Tests.Units
 
         #region private
 
-        private async Task CreatelBlackListTest(BlacklistRuleRequest createRequest)
+        private async Task CreateBlackListTest(BlacklistRuleRequest createRequest)
         {
             var requestTester = GetRequestTester();
             await requestTester.TestMethod<BlacklistRule>(
