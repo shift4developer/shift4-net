@@ -37,7 +37,7 @@ namespace Shift4Tests.Units
         }
 
         [Fact]
-        public async Task CreateCreditWithCartdTest()
+        public async Task CreateCreditWithCardTest()
         {
             var requestTester = GetRequestTester();
             var customerId = "1";

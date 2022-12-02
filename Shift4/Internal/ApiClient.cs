@@ -52,8 +52,8 @@ namespace Shift4
             else
             {
                 ErrorResponse errorResponse;
-                var apiErrorRsponseString = await response.Content.ReadAsStringAsync();
-                errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(apiErrorRsponseString);
+                var apiErrorResponseString = await response.Content.ReadAsStringAsync();
+                errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(apiErrorResponseString);
                 throw new Shift4Exception(errorResponse.Error, typeof(T).Name, url);
             }
         }
@@ -96,8 +96,8 @@ namespace Shift4
             else
             {
                 ErrorResponse errorResponse;
-                var apiErrorRsponseString = await response.Content.ReadAsStringAsync();
-                errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(apiErrorRsponseString);
+                var apiErrorResponseString = await response.Content.ReadAsStringAsync();
+                errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(apiErrorResponseString);
                 throw new Shift4Exception(errorResponse.Error, typeof(T).Name, url);
             }
         }

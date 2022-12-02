@@ -451,7 +451,7 @@ namespace Shift4
 
         #region fraud-warnings
 
-        public async Task<FraudWarning> RetriveFraudWarning(string id)
+        public async Task<FraudWarning> RetrieveFraudWarning(string id)
         {
             var url = FRAUD_WARNING_PATH + "/" + id;
             return await SendRequest<FraudWarning>(HttpMethod.Get, url);

@@ -81,17 +81,17 @@ namespace Shift4Tests.Units
             var requestTester = GetRequestTester();
             var customerId = "1";
             var cardRequest = _cardRequestBuilder.Build();
-            var customerUpdaterequest = new CustomerUpdateRequest() {CustomerId= customerId, Card= cardRequest,DefaultCardId="2" };
+            var customerUpdateRequest = new CustomerUpdateRequest() {CustomerId= customerId, Card= cardRequest,DefaultCardId="2" };
             await requestTester.TestMethod<Customer>(
                 async (api) =>
                 {
-                    await api.UpdateCustomer(customerUpdaterequest);
+                    await api.UpdateCustomer(customerUpdateRequest);
                 },
                 new RequestDescriptor()
                 {
                     Method = HttpMethod.Post,
                     Action = string.Format("customers/{0}", customerId),
-                    Parameter = customerUpdaterequest
+                    Parameter = customerUpdateRequest
                 }
             );
         }

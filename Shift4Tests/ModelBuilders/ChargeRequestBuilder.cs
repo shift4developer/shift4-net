@@ -76,7 +76,7 @@ namespace Shift4Tests.ModelBuilders
                 Shipping = _shipping,
                 Billing = _billing,
                 ThreeDSecure = _threeDSecure,
-                Description= "Decription",
+                Description= "Description",
                 Captured = _captured
             };
         }
