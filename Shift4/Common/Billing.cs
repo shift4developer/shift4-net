@@ -19,5 +19,8 @@ namespace Shift4.Common
 
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
     }
 }

@@ -27,6 +27,9 @@ namespace Shift4.Response
         [JsonProperty("amount")]
         public int Amount { get; set; }
 
+        [JsonProperty("amountRefunded")]
+        public int AmountRefunded { get; set; }
+
         [JsonProperty("currency")]
         public String Currency { get; set; }
 

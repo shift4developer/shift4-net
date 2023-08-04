@@ -30,7 +30,22 @@ namespace Shift4Tests.Integration
             Assert.Equal(request.Type, retrieved.Type);
             Assert.Equal(request.Billing.Name, retrieved.Billing.Name);
             Assert.Equal(PaymentMethodStatus.Chargeable, retrieved.Status);
-
+        }
+        [Fact]
+        public async Task CreateApplePayPaymentMethod()
+        {
+            // given
+            var request = CreateApplePayPaymentMethodRequest();
+            // when
+            var created = await _gateway.CreatePaymentMethod(request);
+            // then
+            Assert.Equal(PaymentMethodType.ApplePay, created.Type);
+            Assert.Equal(100, created.ApplePay.Amount);
+            Assert.Equal("EUR", created.ApplePay.Currency);
+            Assert.NotNull(created.ApplePay.CardBrand);
+            Assert.NotNull(created.ApplePay.CardType);
+            Assert.NotNull(created.ApplePay.First6);
+            Assert.NotNull(created.ApplePay.Last4);
         }
 
         [Fact]
@@ -78,6 +93,18 @@ namespace Shift4Tests.Integration
                 Billing = new Billing()
                 {
                     Name = "Alice Cooper"
+                }
+            };
+        }
+
+        private PaymentMethodRequest CreateApplePayPaymentMethodRequest()
+        {
+            return new PaymentMethodRequest()
+            {
+                Type = PaymentMethodType.ApplePay,
+                ApplePay = new PaymentMethodApplePayRequest()
+                {
+                    Token = "TEST_TOKEN:100EUR"
                 }
             };
         }
