@@ -39,6 +39,9 @@ namespace Shift4.Response
         [JsonProperty("fraudCheckData")]
         public FraudCheckData FraudCheckData { get; set; }
 
+        [JsonProperty("applePay")]
+        public PaymentMethodApplePay ApplePay { get; set; }
+
         [JsonProperty("deleted")]
         public bool Deleted { get; set; }
     }

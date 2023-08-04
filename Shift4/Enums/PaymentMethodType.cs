@@ -11,6 +11,9 @@ namespace Shift4.Enums
         [EnumMember(Value = "alipay")]
         Alipay,
 
+        [EnumMember(Value = "apple_pay")]
+        ApplePay,
+
         [EnumMember(Value = "bancontact")]
         Bancontact,
 

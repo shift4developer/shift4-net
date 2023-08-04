@@ -24,5 +24,9 @@ namespace Shift4.Request
 
         [JsonProperty("billing")]
         public Billing Billing { get; set; }
+
+
+        [JsonProperty("applePay")]
+        public PaymentMethodApplePayRequest ApplePay { get; set; }  
     }
 }
