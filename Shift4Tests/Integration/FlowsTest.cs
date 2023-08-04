@@ -50,7 +50,8 @@ namespace Shift4Tests.Integration
                 Assert.True(charge.Refunded);
                 Assert.Single(charge.Refunds);
                 Assert.Equal(500, charge.Refunds.First().Amount);
-                Assert.Equal(chargeRequest.Amount - 500, charge.Amount);
+                Assert.Equal(500, charge.AmountRefunded);
+                Assert.Equal(chargeRequest.Amount, charge.Amount);
             }
             catch (Shift4Exception exc)
             {
