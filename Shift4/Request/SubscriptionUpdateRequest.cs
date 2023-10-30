@@ -20,8 +20,21 @@ namespace Shift4.Request
         [JsonProperty("quantity")]
         public int? Quantity { get; set; }
 
+        [Obsolete("TrialEnd is deprecated, please use CurrentPeriodEnd instead.")]
         [JsonProperty("trialEnd")]
         public long? TrialEnd { get; set; }
+
+        [JsonProperty("currentPeriodEnd")]
+        public String CurrentPeriodEnd { get; set; }
+
+        public void SetCurrentPeriodEnd(long value)
+        {
+            CurrentPeriodEnd = value.ToString();
+        }
+
+        public void SetCurrentPeriodEndNow() {
+            CurrentPeriodEnd = "now";
+        }
 
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
