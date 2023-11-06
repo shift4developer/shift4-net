@@ -17,6 +17,7 @@ namespace Shift4Tests.Integration
         CardRequestBuilder _cardRequestBuilder = new CardRequestBuilder();
         ChargeRequestBuilder _chargeRequestBuilder = new ChargeRequestBuilder();
         PlanRequestBuilder _planRequestBuilder = new PlanRequestBuilder();
+        UnixDateConverter unixDateConverter = new UnixDateConverter();
 
         [Fact]
         public async Task SubscribeWithNewCardTest()
@@ -157,9 +158,9 @@ namespace Shift4Tests.Integration
                 var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id , Card = cardRequest };
                 var subscription = await _gateway.CreateSubscription(subscriptionRequest);
 
-                var unixDateConverter = new UnixDateConverter();
+                
                 var updatedEnd = unixDateConverter.ToUnixTimeStamp(DateTime.Now.AddDays(10));
-                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() {SubscriptionId = subscription.Id};
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
                 subscriptionUpdateRequest.SetCurrentPeriodEnd(updatedEnd);
                 var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
 
@@ -186,8 +187,7 @@ namespace Shift4Tests.Integration
                 var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id , Card = cardRequest };
                 var subscription = await _gateway.CreateSubscription(subscriptionRequest);
 
-                var unixDateConverter = new UnixDateConverter();
-                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() {SubscriptionId = subscription.Id};
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
                 subscriptionUpdateRequest.SetCurrentPeriodEndNow();
                 var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
 
@@ -215,9 +215,8 @@ namespace Shift4Tests.Integration
                 var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id , TrialEnd = DateTime.Now.AddDays(10), Card = cardRequest };
                 var subscription = await _gateway.CreateSubscription(subscriptionRequest);
 
-                var unixDateConverter = new UnixDateConverter();
                 var updatedEnd = unixDateConverter.ToUnixTimeStamp(DateTime.Now.AddDays(5));
-                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() {SubscriptionId = subscription.Id};
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
                 subscriptionUpdateRequest.SetCurrentPeriodEnd(updatedEnd);
                 var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
 
@@ -246,8 +245,7 @@ namespace Shift4Tests.Integration
                 var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, TrialEnd = DateTime.Now.AddDays(10), PlanId = plan.Id , Card = cardRequest };
                 var subscription = await _gateway.CreateSubscription(subscriptionRequest);
 
-                var unixDateConverter = new UnixDateConverter();
-                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() {SubscriptionId = subscription.Id};
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
                 subscriptionUpdateRequest.SetCurrentPeriodEndNow();
                 var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
 
