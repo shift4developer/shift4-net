@@ -53,12 +53,6 @@ namespace Shift4.Converters
                     var card = new Card();
                     serializer.Populate(jObject.CreateReader(), card);
                     return card;
-                case "crossSaleOffer":
-                    var crossSaleOffer = new CrossSaleOffer();
-                    serializer.Populate(jObject.CreateReader(), crossSaleOffer);
-                    return crossSaleOffer;
-
-
             }
 
             return null;

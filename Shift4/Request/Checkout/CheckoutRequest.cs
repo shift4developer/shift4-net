@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Shift4.Request.CrossSaleOffer;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Shift4.Request.Checkout
 {
@@ -21,9 +17,6 @@ namespace Shift4.Request.Checkout
 
         [JsonProperty("customerId")]
         public string CustomerId {get;set;}
-
-        [JsonProperty("crossSaleOfferIds")]
-        public List<String> CrossSaleOfferIds {get;set;}
 
         [JsonProperty("rememberMe")]
         public bool RememberMe {get;set;}
