@@ -5,10 +5,9 @@ using Shift4.Exception;
 using Shift4.Request;
 using Shift4Tests.ModelBuilders;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Shift4.Internal;
 
 namespace Shift4Tests.Integration
 {
@@ -18,6 +17,7 @@ namespace Shift4Tests.Integration
         CardRequestBuilder _cardRequestBuilder = new CardRequestBuilder();
         ChargeRequestBuilder _chargeRequestBuilder = new ChargeRequestBuilder();
         PlanRequestBuilder _planRequestBuilder = new PlanRequestBuilder();
+        UnixDateConverter unixDateConverter = new UnixDateConverter();
 
         [Fact]
         public async Task SubscribeWithNewCardTest()
@@ -136,6 +136,122 @@ namespace Shift4Tests.Integration
 
                 customer = await _gateway.RetrieveCustomer(customer.Id);
                 Assert.Equal(chargeRequest.Card.CardholderName, customer.Cards.First(c => c.Id == customer.DefaultCardId).CardholderName);
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+    
+        [Fact]
+        public async Task UpdateSubscriptionPeriodEnd()
+        {
+            try
+            {
+                var plan = await _gateway.CreatePlan(_planRequestBuilder.Build());
+
+                var customerRequest = _customerRequestBuilder.Build();
+                var customer = await _gateway.CreateCustomer(customerRequest);
+
+                var cardRequest = _cardRequestBuilder.Build();
+            
+                var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id , Card = cardRequest };
+                var subscription = await _gateway.CreateSubscription(subscriptionRequest);
+
+                
+                var updatedEnd = unixDateConverter.ToUnixTimeStamp(DateTime.Now.AddDays(10));
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
+                subscriptionUpdateRequest.SetCurrentPeriodEnd(updatedEnd);
+                var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
+
+                Assert.Equal(unixDateConverter.FromUnixTimeStamp(updatedEnd).ToLocalTime(), updatedSubscription.CurrentPeriodEnd);
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateSubscriptionPeriodEndNow()
+        {
+            try
+            {
+                var plan = await _gateway.CreatePlan(_planRequestBuilder.Build());
+
+                var customerRequest = _customerRequestBuilder.Build();
+                var customer = await _gateway.CreateCustomer(customerRequest);
+
+                var cardRequest = _cardRequestBuilder.Build();
+            
+                var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id , Card = cardRequest };
+                var subscription = await _gateway.CreateSubscription(subscriptionRequest);
+
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
+                subscriptionUpdateRequest.SetCurrentPeriodEndNow();
+                var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
+
+                Assert.True(unixDateConverter.ToUnixTimeStamp(DateTime.Now) -
+                    unixDateConverter.ToUnixTimeStamp(updatedSubscription.CurrentPeriodEnd) < 5);
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateSubscriptionTrialEnd()
+        {
+            try
+            {
+                var plan = await _gateway.CreatePlan(_planRequestBuilder.Build());
+
+                var customerRequest = _customerRequestBuilder.Build();
+                var customer = await _gateway.CreateCustomer(customerRequest);
+
+                var cardRequest = _cardRequestBuilder.Build();
+            
+                var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id , TrialEnd = DateTime.Now.AddDays(10), Card = cardRequest };
+                var subscription = await _gateway.CreateSubscription(subscriptionRequest);
+
+                var updatedEnd = unixDateConverter.ToUnixTimeStamp(DateTime.Now.AddDays(5));
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
+                subscriptionUpdateRequest.SetCurrentPeriodEnd(updatedEnd);
+                var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
+
+                Assert.Equal(SubscriptionStatus.Trialing, updatedSubscription.Status);
+                Assert.Equal(unixDateConverter.FromUnixTimeStamp(updatedEnd).ToLocalTime(), updatedSubscription.CurrentPeriodEnd);
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        
+        [Fact]
+        public async Task UpdateSubscriptionTrialEndNow()
+        {
+            try
+            {
+                var plan = await _gateway.CreatePlan(_planRequestBuilder.Build());
+
+                var customerRequest = _customerRequestBuilder.Build();
+                var customer = await _gateway.CreateCustomer(customerRequest);
+
+                var cardRequest = _cardRequestBuilder.Build();
+            
+                var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, TrialEnd = DateTime.Now.AddDays(10), PlanId = plan.Id , Card = cardRequest };
+                var subscription = await _gateway.CreateSubscription(subscriptionRequest);
+
+                var subscriptionUpdateRequest = new SubscriptionUpdateRequest() { SubscriptionId = subscription.Id };
+                subscriptionUpdateRequest.SetCurrentPeriodEndNow();
+                var updatedSubscription = await _gateway.UpdateSubscription(subscriptionUpdateRequest);
+
+                Assert.Equal(SubscriptionStatus.Active, updatedSubscription.Status);
+                Assert.True(unixDateConverter.ToUnixTimeStamp(DateTime.Now) -
+                    unixDateConverter.ToUnixTimeStamp(updatedSubscription.CurrentPeriodEnd) < 5);
             }
             catch (Shift4Exception exc)
             {
