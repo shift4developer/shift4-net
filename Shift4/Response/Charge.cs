@@ -83,12 +83,6 @@ namespace Shift4.Response
         [JsonProperty("failureIssuerDeclineCode")]
         public string FailureIssuerDeclineCode { get; set; }
 
-        [JsonProperty("fromCrossSale")]
-        public FromCrossSale FromCrossSale { get; set; }
-
-        [JsonProperty("withCrossSales")]
-        public List<WithCrossSale> WithCrossSales { get; set; }
-
         [JsonProperty("shipping")]
         public Shipping Shipping { get; set; }
 

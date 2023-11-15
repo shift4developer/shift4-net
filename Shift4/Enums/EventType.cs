@@ -59,13 +59,6 @@ namespace Shift4.Enums
         PlanUpdated,
         [EnumMember(Value = "PLAN_DELETED")]
         PlanDeleted,
-
-        [EnumMember(Value = "CROSS_SALE_OFFER_CREATED")]
-        CrossSaleOfferCreated,
-        [EnumMember(Value = "CROSS_SALE_OFFER_UPDATED")]
-        CrossSaleOfferUpdated,
-        [EnumMember(Value = "CROSS_SALE_OFFER_DELETED")]
-        CrossSaleOfferDeleted,
         
         [EnumMember(Value = "FRAUD_WARNING_CREATED")]
         FraudWarningCreated,

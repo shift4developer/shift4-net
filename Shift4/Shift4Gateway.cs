@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Shift4.Response;
 using Shift4.Request;
 using Shift4.Exception;
-using Shift4.Request.CrossSaleOffer;
 using System.Security.Cryptography;
 using Shift4.Internal;
 using Shift4.Request.Checkout;
@@ -36,7 +35,6 @@ namespace Shift4
         private const string SUBSCRIPTIONS_PATH = "subscriptions";
         private const string EVENTS_PATH = "events";
         private const string BLACKLIST_RULE_PATH = "blacklist";
-        private const string CROSS_SALE_OFFER_PATH = "cross-sale-offers";
         private const string FILES_PATH = "files";
         private const string DISPUTES_PATH= "disputes";
         private const string FRAUD_WARNING_PATH = "/fraud-warnings";
@@ -338,43 +336,6 @@ namespace Shift4
         public async Task<ListResponse<BlacklistRule>> ListBlacklistRules(BlacklistRuleListRequest request)
         {
             return await SendListRequest<BlacklistRule>(HttpMethod.Get, BLACKLIST_RULE_PATH, request);
-        }
-
-        #endregion
-
-        #region cross-sale-offer
-
-        public async Task<CrossSaleOffer> CreateCrossSaleOffer(CrossSaleOfferRequest request)
-        {
-            return await SendRequest<CrossSaleOffer>(HttpMethod.Post, CROSS_SALE_OFFER_PATH, request);
-        }
-
-        public async Task<CrossSaleOffer> RetrieveCrossSaleOffer(string crossSaleOfferId)
-        {
-            var url = CROSS_SALE_OFFER_PATH + "/" + crossSaleOfferId;
-            return await SendRequest<CrossSaleOffer>(HttpMethod.Get, url);
-        }
-
-        public async Task<CrossSaleOffer> UpdateCrossSaleOffer(CrossSaleOfferUpdateRequest request)
-        {
-            var url = CROSS_SALE_OFFER_PATH + "/" + request.CrossSaleOfferId;
-            return await SendRequest<CrossSaleOffer>(HttpMethod.Post, url, request);
-
-        }
-        public async Task<DeleteResponse> DeleteCrossSaleOffer(string crossSaleOfferId)
-        {
-            var url = CROSS_SALE_OFFER_PATH + "/" + crossSaleOfferId;
-            return await SendRequest<DeleteResponse>(HttpMethod.Delete, url);
-        }
-
-        public async Task<ListResponse<CrossSaleOffer>> ListCrossSaleOffers()
-        {
-            return await SendListRequest<CrossSaleOffer>(HttpMethod.Get, CROSS_SALE_OFFER_PATH);
-        }
-
-        public async Task<ListResponse<CrossSaleOffer>> ListCrossSaleOffers(CrossSaleOfferListRequest request)
-        {
-            return await SendListRequest<CrossSaleOffer>(HttpMethod.Get, CROSS_SALE_OFFER_PATH, request);
         }
 
         #endregion
