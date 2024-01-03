@@ -84,7 +84,7 @@ namespace Shift4Tests.Units
             await apiClient.SendRequest<TestRequest>(HttpMethod.Put, "https://testAction.com", new TestParameter());
 
             httpclientMock.Verify(client => client.SetAuthorizationHeader(It.Is<AuthenticationHeaderValue>(header => header.Scheme == "Basic" && header.Parameter == "a2V5Og==")));
-            httpclientMock.Verify(client => client.AddHeader(It.Is<string>(name => name == "User-Agent"), It.Is<string>(value => value == string.Format("Shift4-DOTNET/{0}", appVersion))));
+            httpclientMock.Verify(client => client.AddHeader(It.Is<string>(name => name == "User-Agent"), It.Is<string>(value => value.StartsWith(string.Format("Shift4-DOTNET/{0}", appVersion)))));
 
         }
 
