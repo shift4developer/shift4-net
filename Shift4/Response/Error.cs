@@ -21,8 +21,14 @@ namespace Shift4.Response
         [JsonConverter(typeof(SafeEnumConverter))]
         public ErrorCode? Code { get; set; }
 
+        [JsonProperty("issuerDeclineCode")]
+        public string IssuerDeclineCode { get; set; }
+
         [JsonProperty("chargeId")]
         public string ChargeId { get; set; }
+
+        [JsonProperty("creditId")]
+        public string CreditId { get; set; }
 
         [JsonProperty("blacklistRuleId")]
         public string BlacklistRuleId { get; set; }
