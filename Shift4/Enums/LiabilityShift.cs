@@ -17,6 +17,9 @@ namespace Shift4.Enums
         [EnumMember(Value = "not_possible")]
         NotPossible,
 
+        [EnumMember(Value = "pending")]
+        Pending,
+
 	    // Used when received value can't be mapped to this enumeration.
 	    Unrecognized
     }

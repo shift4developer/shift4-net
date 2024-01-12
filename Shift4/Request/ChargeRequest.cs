@@ -2,12 +2,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Shift4.Common;
 using Shift4.Converters;
+using Shift4.Enums;
 using System;
 using System.Collections.Generic;
 namespace Shift4.Request
 {
     public class ChargeRequest : BaseRequest
     {
+
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
@@ -16,6 +18,10 @@ namespace Shift4.Request
         /// </summary>
         [JsonProperty("currency")]
         public String Currency { get; set; }
+
+        [JsonProperty("type")]
+        [JsonConverter(typeof(SafeEnumConverter))]
+        public ChargeType? Type { get; set; }
 
         [JsonProperty("description")]
         public String Description { get; set; }
@@ -43,6 +49,9 @@ namespace Shift4.Request
 
         [JsonProperty("flow")]
         public ChargeFlowRequest Flow { get; set; }
+        
+        [JsonProperty("merchantAccountId")]
+        public String MerchantAccountId { get; set; }
 
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }

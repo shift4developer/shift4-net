@@ -17,7 +17,10 @@ namespace Shift4.Enums
         [EnumMember(Value = "gateway_error")]
         GatewayError,
 
-	    // Used when received value can't be mapped to this enumeration.
-	    Unrecognized
+        [EnumMember(Value = "rate_limit_error")]
+        RateLimitError,
+
+        // Used when received value can't be mapped to this enumeration.
+        Unrecognized
     }
 }
