@@ -38,6 +38,7 @@ namespace Shift4
         private const string FILES_PATH = "files";
         private const string DISPUTES_PATH= "disputes";
         private const string FRAUD_WARNING_PATH = "/fraud-warnings";
+        private const string REFUNDS_PATH = "refunds";
         private IApiClient _apiClient;
         private ISignService _signService;
         private IConfigurationProvider _configurationProvider;
@@ -72,10 +73,21 @@ namespace Shift4
             return await SendRequest<Charge>(HttpMethod.Post, url, capture);
         }
 
-        public async Task<Charge> RefundCharge(RefundRequest refund)
+        public async Task<Refund> CreateRefund(RefundRequest refund)
         {
-            var url = string.Format("{0}/{1}/refund", CHARGES_PATH, refund.ChargeId);
-            return await SendRequest<Charge>(HttpMethod.Post, url, refund);
+            return await SendRequest<Refund>(HttpMethod.Post, REFUNDS_PATH, refund);
+        }
+
+        public async Task<Refund> UpdateRefund(RefundUpdateRequest request)
+        {
+            var url = string.Format("{0}/{1}", REFUNDS_PATH, request.RefundId);
+            return await SendRequest<Refund>(HttpMethod.Post, url, request);
+        }
+
+        public async Task<Refund> RetrieveRefund(string RefundId)
+        {
+            var url = string.Format("{0}/{1}", REFUNDS_PATH, RefundId);
+            return await SendRequest<Refund>(HttpMethod.Get, url);
         }
 
         public async Task<Charge> RetrieveCharge(string id)

@@ -99,26 +99,6 @@ namespace Shift4Tests.Units
         }
 
         [Fact]
-        public async Task RefundChargeTest()
-        {
-            var requestTester = GetRequestTester();
-            var chargeId = "1";
-            var refundRequest = new RefundRequest() { ChargeId = chargeId,Amount=500 };
-            await requestTester.TestMethod<Charge>(
-                async (api) =>
-                {
-                    await api.RefundCharge(refundRequest);
-                },
-                new RequestDescriptor()
-                {
-                    Method = HttpMethod.Post,
-                    Action = string.Format("charges/{0}/refund", chargeId),
-                    Parameter = refundRequest
-                }
-            );
-        }
-
-        [Fact]
         public async Task ListChargeTest()
         {
             var requestTester = GetRequestTester();
