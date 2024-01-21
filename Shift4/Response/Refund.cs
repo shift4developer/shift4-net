@@ -3,13 +3,14 @@ using Shift4.Converters;
 using Shift4.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Shift4.Response
 {
     public class Refund : BaseResponse
     {
+        [JsonProperty("id")]
+        public String Id { get; set; }
+
         [JsonProperty("amount")]
         public int Amount { get; set; }
 
@@ -30,6 +31,9 @@ namespace Shift4.Response
         [JsonProperty("status")]
         [JsonConverter(typeof(SafeEnumConverter))]
         public RefundStatus Status { get; set; }
+
+        [JsonProperty("metadata")]
+        public Dictionary<String, String> Metadata { get; set; }
     }
 }
 

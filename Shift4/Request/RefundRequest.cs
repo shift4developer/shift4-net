@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Shift4.Converters;
 using Shift4.Enums;
 using System;
@@ -8,7 +7,7 @@ namespace Shift4.Request
 {
     public class RefundRequest : BaseRequest
     {
-        [JsonIgnore]
+        [JsonProperty("chargeId")]
         public String ChargeId { get;  set; }
 
         [JsonProperty("amount")]
@@ -17,6 +16,9 @@ namespace Shift4.Request
         [JsonProperty("reason")]
         [JsonConverter(typeof(SafeEnumConverter))]
         public RefundReason? Reason { get; set; }
+
+        [JsonProperty("metadata")]
+        public Dictionary<String, String> Metadata { get; set; }
 
     }
 }

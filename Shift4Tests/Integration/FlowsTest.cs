@@ -42,7 +42,7 @@ namespace Shift4Tests.Integration
                 charge = await _gateway.CaptureCharge(capture);
 
                 var refund = new RefundRequest() { ChargeId = charge.Id, Amount = 500 };
-                charge = await _gateway.RefundCharge(refund);
+                await _gateway.CreateRefund(refund);
 
                 charge = await _gateway.RetrieveCharge(charge.Id);
 
