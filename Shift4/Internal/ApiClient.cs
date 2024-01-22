@@ -4,8 +4,6 @@ using Shift4.Internal;
 using Shift4.Response;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,6 +16,7 @@ namespace Shift4
         private string _privateAuthToken;
         private IHttpClient _client;
         private IFileExtensionToMimeMapper _fileExtensionToMimeMapper;
+        private string _sdkVersion = "3.0.1"; 
 
         public ApiClient(IHttpClient httpClient, ISecretKeyProvider secretKeyProvider, IFileExtensionToMimeMapper fileExtensionToMimeMapper)
         {
@@ -27,10 +26,7 @@ namespace Shift4
             _fileExtensionToMimeMapper = fileExtensionToMimeMapper;
             _client = httpClient;
             _client.SetAuthorizationHeader(new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", _privateAuthToken));
-            
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
-            _client.AddHeader("User-Agent", string.Format("Shift4-DOTNET/{0}", fvi.ProductVersion));
+            _client.AddHeader("User-Agent", string.Format("Shift4-NET/{0}", _sdkVersion));
         }
 
         public async Task<T> SendRequest<T>(HttpMethod method, string url, object parameter)
