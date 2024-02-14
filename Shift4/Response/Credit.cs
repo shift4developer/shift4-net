@@ -35,6 +35,9 @@ namespace Shift4.Response
         [JsonProperty("customerId")]
         public string CustomerId { get; set; }
 
+        [JsonProperty("merchantAccountId")]
+        public string MerchantAccountId { get; set; }
+
         [JsonProperty("threeDSecureInfo")]
         public ThreeDSecureInfo ThreeDSecureInfo { get; set; }
 

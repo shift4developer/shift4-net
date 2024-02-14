@@ -50,10 +50,13 @@ namespace Shift4.Response
         public ChargeFlow Flow { get; set; }
 
         [JsonProperty("customerId")]
-        public String CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [JsonProperty("subscriptionId")]
         public string SubscriptionId { get; set; }
+
+        [JsonProperty("merchantAccountId")]
+        public string MerchantAccountId { get; set; }
 
         [JsonProperty("captured")]
         public Boolean Captured { get; set; }

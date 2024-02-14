@@ -36,6 +36,9 @@ namespace Shift4.Response
         [JsonProperty("customerId")]
         public String CustomerId { get; set; }
 
+        [JsonProperty("merchantAccountId")]
+        public string MerchantAccountId { get; set; }
+
         [JsonProperty("brand")]
         [JsonConverter(typeof(SafeEnumConverter))]
         public CardBrand Brand { get; set; }

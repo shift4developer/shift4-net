@@ -22,6 +22,9 @@ namespace Shift4.Request
 
         [JsonProperty("customerId")]
         public string CustomerId { get; set; }
+        
+        [JsonProperty("merchantAccountId")]
+        public String MerchantAccountId { get; set; }
 
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
