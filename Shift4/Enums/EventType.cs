@@ -9,6 +9,8 @@ namespace Shift4.Enums
     public enum EventType
     {
 
+        [EnumMember(Value = "CHARGE_PENDING")]
+        ChargePending,
         [EnumMember(Value = "CHARGE_SUCCEEDED")]
         ChargeSucceeded,
         [EnumMember(Value = "CHARGE_FAILED")]
@@ -19,6 +21,9 @@ namespace Shift4.Enums
         ChargeCaptured,
         [EnumMember(Value = "CHARGE_REFUNDED")]
         ChargeRefunded,
+
+        [EnumMember(Value = "REFUND_UPDATED")]
+        RefundUpdated,
 
         [EnumMember(Value = "CHARGE_DISPUTE_CREATED")]
         ChargeDisputeCreated,
@@ -72,12 +77,17 @@ namespace Shift4.Enums
         [EnumMember(Value = "CREDIT_UPDATED")]
         CreditUpdated,
 
-	    [EnumMember(Value = "PAYMENT_METHOD_CREATED")]
-	    PaymentMethodCreated,
-	    [EnumMember(Value = "PAYMENT_METHOD_UPDATED")]
-	    PaymentMethodUpdated,
-	    [EnumMember(Value = "PAYMENT_METHOD_DELETED")]
-	    PaymentMethodDeleted,
+        [EnumMember(Value = "PAYMENT_METHOD_CREATED")]
+        PaymentMethodCreated,
+        [EnumMember(Value = "PAYMENT_METHOD_UPDATED")]
+        PaymentMethodUpdated,
+        [EnumMember(Value = "PAYMENT_METHOD_DELETED")]
+        PaymentMethodDeleted,
+
+        [EnumMember(Value = "PAYOUT_CREATED")]
+        PayoutCreated,
+        [EnumMember(Value = "PAYOUT_UPDATED")]
+        PayoutUpdated,
 
         //Used when received value can't be mapped to this enumeration.
         Unrecognized
