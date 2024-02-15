@@ -446,8 +446,8 @@ namespace Shift4
 
         #endregion
 
-
         #region payouts
+
         public async Task<ListResponse<Payout>> ListPayouts()
         {
             return await SendListRequest<Payout>(HttpMethod.Get, PAYOUTS_PATH);
