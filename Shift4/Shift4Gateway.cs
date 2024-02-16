@@ -39,6 +39,8 @@ namespace Shift4
         private const string DISPUTES_PATH= "disputes";
         private const string FRAUD_WARNING_PATH = "/fraud-warnings";
         private const string REFUNDS_PATH = "refunds";
+        private const string PAYOUTS_PATH = "payouts";
+        private const string PAYOUT_TRANSACTIONS_PATH = "payout-transactions";
         private IApiClient _apiClient;
         private ISignService _signService;
         private IConfigurationProvider _configurationProvider;
@@ -441,6 +443,41 @@ namespace Shift4
         }
 
 
+
+        #endregion
+
+        #region payouts
+
+        public async Task<ListResponse<Payout>> ListPayouts()
+        {
+            return await SendListRequest<Payout>(HttpMethod.Get, PAYOUTS_PATH);
+        }
+
+        public async Task<ListResponse<Payout>> ListPayouts(PayoutListRequest request)
+        {
+            return await SendListRequest<Payout>(HttpMethod.Get, PAYOUTS_PATH, request);
+        }
+
+        public async Task<Payout> CreatePayout()
+        {
+            return await SendRequest<Payout>(HttpMethod.Post, PAYOUTS_PATH);
+        }
+
+        public async Task<Payout> RetrievePayout(string id)
+        {
+            var url = PAYOUTS_PATH + "/" + id;
+            return await SendRequest<Payout>(HttpMethod.Get, url);
+        }
+
+        #endregion
+
+        #region payout-transactions
+
+        public async Task<ListResponse<PayoutTransaction>> ListPayoutTransactions(PayoutTransactionListRequest request)
+        {
+            var url = PAYOUT_TRANSACTIONS_PATH;
+            return await SendListRequest<PayoutTransaction>(HttpMethod.Get, url, request);
+        }
 
         #endregion
 
