@@ -14,5 +14,8 @@ namespace Shift4.Response
 
         [JsonProperty("totalCount")]
         public int? TotalCount { get; set; }
+
+        [JsonProperty("hasMore")]
+        public bool HasMore { get; set; }
     }
 }

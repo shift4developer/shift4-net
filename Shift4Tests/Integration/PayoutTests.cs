@@ -88,6 +88,7 @@ namespace Shift4Tests.Integration
             Assert.NotNull(chargePayoutTransaction);
             Assert.True(chargePayoutTransaction.List.Count == 1);
             var chargeTransaction = chargePayoutTransaction.List[0];
+            Assert.False(chargePayoutTransaction.HasMore);
             Assert.Equal(chargeTransaction.Type, PayoutTransactionType.Charge);
             Assert.Equal(chargeTransaction.Amount, charge.Amount);
             Assert.Equal(chargeTransaction.Currency, charge.Currency);
