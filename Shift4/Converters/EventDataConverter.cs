@@ -53,6 +53,10 @@ namespace Shift4.Converters
                     var card = new Card();
                     serializer.Populate(jObject.CreateReader(), card);
                     return card;
+                case "payout":
+                    var payout = new Payout();
+                    serializer.Populate(jObject.CreateReader(), payout);
+                    return payout;
             }
 
             return null;
