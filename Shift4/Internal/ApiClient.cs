@@ -16,7 +16,7 @@ namespace Shift4
         private string _privateAuthToken;
         private IHttpClient _client;
         private IFileExtensionToMimeMapper _fileExtensionToMimeMapper;
-        private string _sdkVersion = "3.4.1";
+        private string _sdkVersion = "3.5.0";
 
         public ApiClient(IHttpClient httpClient, ISecretKeyProvider secretKeyProvider, IFileExtensionToMimeMapper fileExtensionToMimeMapper)
         {
