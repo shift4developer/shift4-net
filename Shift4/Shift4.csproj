@@ -8,9 +8,9 @@
 
   <PropertyGroup>
     <PackageId>Shift4</PackageId>
-    <Version>3.4.1</Version>
+    <Version>3.5.0</Version>
     <Authors>Shift4</Authors>
-    <Copyright>©2022 Shift4. All rights reserved.</Copyright>
+    <Copyright>©2024 Shift4. All rights reserved.</Copyright>
     <Company>Shift4</Company>
     <Description>Shift4 .Net Library</Description>
     <PackageIcon>icon.png</PackageIcon>

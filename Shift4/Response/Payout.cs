@@ -29,6 +29,9 @@ namespace Shift4.Response
         [JsonConverter(typeof(DateConverter))]
         public DateTime PeriodEnd { get; set; }
 
+        [JsonProperty("merchantAccountId")]
+        public String merchantAccountId { get; set; }
+
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
     }
