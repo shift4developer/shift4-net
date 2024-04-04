@@ -9,7 +9,7 @@ namespace Shift4.Request
     public class CreditRequest : BaseRequest
     {
         [JsonProperty("amount")]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }

@@ -21,7 +21,7 @@ namespace Shift4.Response
         public string ObjectType { get; set; }
 
         [JsonProperty("amount")]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }
