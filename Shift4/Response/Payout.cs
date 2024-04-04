@@ -32,6 +32,9 @@ namespace Shift4.Response
         [JsonProperty("merchantAccountId")]
         public String merchantAccountId { get; set; }
 
+        [JsonProperty("payoutNumber")]
+        public String PayoutNumber { get; set; }
+
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
     }
