@@ -20,7 +20,7 @@ namespace Shift4.Response
         public PayoutTransactionType Type { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("fee")]
         public int? Fee { get; set; }
