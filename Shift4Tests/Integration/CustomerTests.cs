@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shift4Tests.Utils;
 
 namespace Shift4Tests.Integration
 {
@@ -27,6 +28,26 @@ namespace Shift4Tests.Integration
                 Assert.Single(customer.Cards);
                 Assert.Equal(customerRequest.Card.CardholderName, customer.Cards.First().CardholderName);
 
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        [Fact]
+        public async Task CreateCustomeOnlyOnceWithIdempotencyKeyTest()
+        {
+            try
+            {
+                var requestOptions = RequestOptions.WithIdempotencyKey(TestUtils.IdempotencyKey());
+                var customerRequest = _customerRequestBuilder.WithCard(_cardRequestBuilder).Build();
+                var customer = await _gateway.CreateCustomer(customerRequest, requestOptions);
+                var sameCustomer = await _gateway.CreateCustomer(customerRequest, requestOptions);
+
+                Assert.Single(customer.Cards);
+                Assert.Equal(customerRequest.Card.CardholderName, customer.Cards.First().CardholderName);
+                Assert.Equal(customer.Id, sameCustomer.Id);
             }
             catch (Shift4Exception exc)
             {

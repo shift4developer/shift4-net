@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shift4Tests.Utils;
 
 namespace Shift4Tests.Integration
 {
@@ -60,6 +61,43 @@ namespace Shift4Tests.Integration
             Assert.Equal(payout.PeriodEnd, listedPayout.PeriodEnd);
             Assert.Equal(payout.Amount, listedPayout.Amount);
             Assert.Equal(payout.Currency, listedPayout.Currency);
+        }
+
+        [Fact]
+        public async Task CreateOnePayoutWithIdempotencyKey()
+        {
+            // given
+            var payout = await _gateway.CreatePayout();
+            var charge = await _gateway.CreateCharge(new ChargeRequest()
+            {
+                Amount = 100,
+                Currency = "USD",
+                Card = new CardRequest()
+                {
+                    Number = "4242424242424242",
+                    ExpMonth = "12",
+                    ExpYear = "2033"
+                }
+            });
+
+            var refund = await _gateway.CreateRefund(new RefundRequest()
+            {
+                ChargeId = charge.Id,
+                Amount = 30,
+                Metadata = new Dictionary<string, string>
+                {
+                    {"key" , "value"}
+                }
+            });
+
+            var requestOptions = RequestOptions.WithIdempotencyKey(TestUtils.IdempotencyKey());
+
+            // when
+            payout = await _gateway.CreatePayout(requestOptions);
+            var samePayout = await _gateway.CreatePayout(requestOptions);
+
+            // then
+            Assert.Equal(payout.Id, samePayout.Id);
         }
 
         [Fact]

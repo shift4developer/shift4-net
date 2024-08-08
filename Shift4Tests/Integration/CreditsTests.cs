@@ -46,6 +46,37 @@ namespace Shift4Tests.Integration
         }
 
         /// <summary>
+        /// test for creating credit only once
+        /// </summary>
+        [Fact]
+        public async Task CreateCreditWithTokenOnlyOnceTest()
+        {
+            try
+            {
+                var createTokenRequest = _tokenRequestBuilder.Build();
+                var token = await _gateway.CreateToken(createTokenRequest);
+
+                var creditRequest = new CreditRequest()
+                {
+                    Amount = 100,
+                    Currency = "EUR",
+                    Description = "desc",
+                    Card = _cardRequestBuilder.WithId(token.Id).Build()
+                };
+
+                var requestOptions = RequestOptions.WithIdempotencyKey(TestUtils.IdempotencyKey());
+                var newCredit = await _gateway.CreateCredit(creditRequest, requestOptions);
+                var sameCredit = await _gateway.CreateCredit(creditRequest, requestOptions);
+
+                Assert.Equal(newCredit.Id, sameCredit.Id);
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        /// <summary>
         /// test for creating and retrieving credits
         /// </summary>
         [Fact]
@@ -178,6 +209,46 @@ namespace Shift4Tests.Integration
                 };
                 var updatedCredit = await _gateway.UpdateCredit(creditUpdateRequest);
                 Assert.Equal(creditUpdateRequest.Description, updatedCredit.Description);
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        /// <summary>
+        /// test for updatingCredits with idempotency key
+        /// </summary>
+        [Fact]
+        public async Task UpdateCreditOnlyOnceTest()
+        {
+            try
+            {
+                var createTokenRequest = _tokenRequestBuilder.Build();
+                var token = await _gateway.CreateToken(createTokenRequest);
+
+                var creditRequest = new CreditRequest()
+                {
+                    Amount = 100,
+                    Currency = "EUR",
+                    Description = "desc",
+                    Card = _cardRequestBuilder.WithId(token.Id).Build()
+                };
+                var newCredit = await _gateway.CreateCredit(creditRequest);
+
+                var creditUpdateRequest = new CreditUpdateRequest()
+                {
+                    CreditId = newCredit.Id,
+                    Description = "new description"
+                };
+
+                var requestOptions = RequestOptions.WithIdempotencyKey(TestUtils.IdempotencyKey());
+                
+                var updatedCredit = await _gateway.UpdateCredit(creditUpdateRequest, requestOptions);
+                var sameUpdate = await _gateway.UpdateCredit(creditUpdateRequest, requestOptions);
+
+                Assert.Equal(creditUpdateRequest.Description, updatedCredit.Description);
+                Assert.Equal(updatedCredit.Id, sameUpdate.Id);
             }
             catch (Shift4Exception exc)
             {
