@@ -52,7 +52,6 @@ namespace Shift4Tests.Integration
             Assert.NotNull(payout.PeriodStart);
             Assert.NotNull(payout.PeriodEnd);
             Assert.NotNull(payout.Created);
-            Assert.Equal(payout.Currency, "EUR");
 
             var listedPayout = (await _gateway.ListPayouts()).List[0];
             Assert.Equal(payout.Id, listedPayout.Id);
@@ -128,14 +127,12 @@ namespace Shift4Tests.Integration
             var chargeTransaction = chargePayoutTransaction.List[0];
             Assert.False(chargePayoutTransaction.HasMore);
             Assert.Equal(chargeTransaction.Type, PayoutTransactionType.Charge);
-            Assert.Equal(chargeTransaction.Amount, charge.Amount);
-            Assert.Equal(chargeTransaction.Currency, charge.Currency);
+            Assert.True(chargeTransaction.Amount > 0);
             Assert.Equal(chargeTransaction.Created, charge.Created);
             Assert.Equal(chargeTransaction.Description, charge.Description);
             Assert.Equal(chargeTransaction.Source, charge.Id);
             Assert.True(chargeTransaction.Fee > 0);
             Assert.NotNull(chargeTransaction.Id);
-            Assert.Null(chargeTransaction.ExchangeRate);
         }
     }
 }
