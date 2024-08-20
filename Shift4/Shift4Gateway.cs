@@ -730,31 +730,17 @@ namespace Shift4
             }
         }
 
-        private async Task<T> SendRequest<T>(HttpMethod method, string action)
-        {
-            return await SendRequest<T>(method, action, (object) null);
-        }
-
-        private async Task<T> SendRequest<T>(HttpMethod method, string action, object parameter)
-        {
-            return await SendRequest<T>(method, action, parameter, (RequestOptions) null);
-        }
-
-        private async Task<T> SendRequest<T>(HttpMethod method, string action, RequestOptions requestOptions)
+        private async Task<T> SendRequest<T>(HttpMethod method, string action, RequestOptions requestOptions = null)
         {
             return await SendRequest<T>(method, action, null, requestOptions);
         }
 
-        private async Task<T> SendRequest<T>(HttpMethod method, string action, object parameter, RequestOptions requestOptions)
+        private async Task<T> SendRequest<T>(HttpMethod method, string action, object parameter, RequestOptions requestOptions = null)
         {
             return await SendRequest<T>(method, action, parameter, _configurationProvider.GetApiUrl(), requestOptions);
         }
-        private async Task<T> SendRequest<T>(HttpMethod method, string action, object parameter, string baseUrl)
-        {
-            return await SendRequest<T>(method, action, parameter, baseUrl, null);
-        }
 
-        private async Task<T> SendRequest<T>(HttpMethod method, string action, object parameter, string baseUrl, RequestOptions requestOptions)
+        private async Task<T> SendRequest<T>(HttpMethod method, string action, object parameter, string baseUrl, RequestOptions requestOptions = null)
         {
             var url = new Uri(new Uri(baseUrl), action);
             return await _apiClient.SendRequest<T>(method, url.ToString(), parameter, requestOptions);

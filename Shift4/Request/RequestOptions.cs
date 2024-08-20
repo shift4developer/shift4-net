@@ -16,9 +16,5 @@ namespace Shift4.Request
         public String GetIdempotencyKey() {
             return _idempotencyKey;
         }
-
-        public bool HasIdempotencyKey() {
-            return !String.IsNullOrEmpty(_idempotencyKey);
-        }
     }
 }

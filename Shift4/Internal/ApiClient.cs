@@ -30,16 +30,11 @@ namespace Shift4
             _client.AddHeader("User-Agent", string.Format("Shift4-NET/{0}", _sdkVersion));
         }
 
-        public async Task<T> SendRequest<T>(HttpMethod method, string url, object parameter)
-        {
-            return await SendRequest<T>(method, url, parameter, null);
-        }
-
-        public async Task<T> SendRequest<T>(HttpMethod method, string url, object parameter, RequestOptions requestOptions)
+        public async Task<T> SendRequest<T>(HttpMethod method, string url, object parameter, RequestOptions requestOptions = null)
         {
 
             HttpRequestMessage request = new HttpRequestMessage(method,url);
-            if (requestOptions != null && requestOptions.HasIdempotencyKey())
+            if (requestOptions != null && !String.IsNullOrEmpty(requestOptions.GetIdempotencyKey()))
             {
                 request.Headers.Add("Idempotency-Key", requestOptions.GetIdempotencyKey());
             }

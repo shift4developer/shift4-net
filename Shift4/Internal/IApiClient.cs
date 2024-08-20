@@ -10,7 +10,6 @@ namespace Shift4
 {
     public interface IApiClient
     {
-        Task<T> SendRequest<T>(HttpMethod method, string url, object parameter);
         Task<T> SendRequest<T>(HttpMethod method, string url, object parameter, RequestOptions requestOptions);
         Task<T> SendMultiPartRequest<T>(HttpMethod method, string url, Dictionary<string, string> form, byte[] fileBody, string fileName);
     }
