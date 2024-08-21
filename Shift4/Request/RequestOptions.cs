@@ -4,17 +4,17 @@ namespace Shift4.Request
 {
     public class RequestOptions
     {
-        private readonly String _idempotencyKey;
+        public String IdempotencyKey { get;  set; }
 
-        private RequestOptions(String idempotencyKey) => _idempotencyKey = idempotencyKey;
-
-        public static RequestOptions WithIdempotencyKey(String idempotencyKey)
+        public RequestOptions()
         {
-            return new RequestOptions(idempotencyKey);
+
         }
 
-        public String GetIdempotencyKey() {
-            return _idempotencyKey;
+        public RequestOptions WithIdempotencyKey(String idempotencyKey)
+        {
+            IdempotencyKey = idempotencyKey;
+            return this;
         }
     }
 }

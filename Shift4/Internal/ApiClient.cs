@@ -34,9 +34,9 @@ namespace Shift4
         {
 
             HttpRequestMessage request = new HttpRequestMessage(method,url);
-            if (requestOptions != null && !String.IsNullOrEmpty(requestOptions.GetIdempotencyKey()))
+            if (requestOptions != null && !String.IsNullOrEmpty(requestOptions.IdempotencyKey))
             {
-                request.Headers.Add("Idempotency-Key", requestOptions.GetIdempotencyKey());
+                request.Headers.Add("Idempotency-Key", requestOptions.IdempotencyKey);
             }
 
             if (parameter != null)

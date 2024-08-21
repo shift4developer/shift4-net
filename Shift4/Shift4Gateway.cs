@@ -64,45 +64,23 @@ namespace Shift4
 
         #region Charge
 
-        public async Task<Charge> CreateCharge(ChargeRequest chargeRequest)
-        {
-            return await SendRequest<Charge>(HttpMethod.Post, CHARGES_PATH, chargeRequest);
-        }
-
-        public async Task<Charge> CreateCharge(ChargeRequest chargeRequest, RequestOptions requestOptions)
+        public async Task<Charge> CreateCharge(ChargeRequest chargeRequest, RequestOptions requestOptions = null)
         {
             return await SendRequest<Charge>(HttpMethod.Post, CHARGES_PATH, chargeRequest, requestOptions);
         }
 
-        public async Task<Charge> CaptureCharge(CaptureRequest capture)
-        {
-            var url = string.Format("{0}/{1}/capture", CHARGES_PATH, capture.ChargeId);
-            return await SendRequest<Charge>(HttpMethod.Post, url, capture);
-        }
-
-        public async Task<Charge> CaptureCharge(CaptureRequest capture, RequestOptions requestOptions)
+        public async Task<Charge> CaptureCharge(CaptureRequest capture, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}/capture", CHARGES_PATH, capture.ChargeId);
             return await SendRequest<Charge>(HttpMethod.Post, url, capture, requestOptions);
         }
 
-        public async Task<Refund> CreateRefund(RefundRequest refund)
-        {
-            return await SendRequest<Refund>(HttpMethod.Post, REFUNDS_PATH, refund);
-        }
-
-        public async Task<Refund> CreateRefund(RefundRequest refund, RequestOptions requestOptions)
+        public async Task<Refund> CreateRefund(RefundRequest refund, RequestOptions requestOptions = null)
         {
             return await SendRequest<Refund>(HttpMethod.Post, REFUNDS_PATH, refund, requestOptions);
         }
 
-        public async Task<Refund> UpdateRefund(RefundUpdateRequest request)
-        {
-            var url = string.Format("{0}/{1}", REFUNDS_PATH, request.RefundId);
-            return await SendRequest<Refund>(HttpMethod.Post, url, request);
-        }
-
-        public async Task<Refund> UpdateRefund(RefundUpdateRequest request, RequestOptions requestOptions)
+        public async Task<Refund> UpdateRefund(RefundUpdateRequest request, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}", REFUNDS_PATH, request.RefundId);
             return await SendRequest<Refund>(HttpMethod.Post, url, request, requestOptions);
@@ -120,13 +98,7 @@ namespace Shift4
             return await SendRequest<Charge>(HttpMethod.Get, url);
         }
 
-        public async Task<Charge> UpdateCharge(ChargeUpdateRequest chargeUpdate)
-        {
-            var url = string.Format("{0}/{1}", CHARGES_PATH, chargeUpdate.ChargeId);
-            return await SendRequest<Charge>(HttpMethod.Post, url, chargeUpdate);
-        }
-
-        public async Task<Charge> UpdateCharge(ChargeUpdateRequest chargeUpdate, RequestOptions requestOptions)
+        public async Task<Charge> UpdateCharge(ChargeUpdateRequest chargeUpdate, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}", CHARGES_PATH, chargeUpdate.ChargeId);
             return await SendRequest<Charge>(HttpMethod.Post, url, chargeUpdate, requestOptions);
@@ -157,23 +129,12 @@ namespace Shift4
 
         #region Customers
 
-        public async Task<Customer> CreateCustomer(CustomerRequest createCustomerRequest)
-        {
-            return await SendRequest<Customer>(HttpMethod.Post, CUSTOMERS_PATH, createCustomerRequest);
-        }
-
-        public async Task<Customer> CreateCustomer(CustomerRequest createCustomerRequest, RequestOptions requestOptions)
+        public async Task<Customer> CreateCustomer(CustomerRequest createCustomerRequest, RequestOptions requestOptions = null)
         {
             return await SendRequest<Customer>(HttpMethod.Post, CUSTOMERS_PATH, createCustomerRequest, requestOptions);
         }
 
-        public async Task<Customer> UpdateCustomer(CustomerUpdateRequest updateCustomerRequest)
-        {
-            var url = string.Format("{0}/{1}", CUSTOMERS_PATH, updateCustomerRequest.CustomerId);
-            return await SendRequest<Customer>(HttpMethod.Post, url, updateCustomerRequest);
-        }
-
-        public async Task<Customer> UpdateCustomer(CustomerUpdateRequest updateCustomerRequest, RequestOptions requestOptions)
+        public async Task<Customer> UpdateCustomer(CustomerUpdateRequest updateCustomerRequest, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}", CUSTOMERS_PATH, updateCustomerRequest.CustomerId);
             return await SendRequest<Customer>(HttpMethod.Post, url, updateCustomerRequest, requestOptions);
@@ -206,13 +167,7 @@ namespace Shift4
 
         #region Cards
 
-        public async Task<Card> CreateCard(CardRequest createCardRequest)
-        {
-            var url = string.Format(CARDS_PATH, createCardRequest.CustomerId);
-            return await SendRequest<Card>(HttpMethod.Post, url, createCardRequest);
-        }
-
-        public async Task<Card> CreateCard(CardRequest createCardRequest, RequestOptions requestOptions)
+        public async Task<Card> CreateCard(CardRequest createCardRequest, RequestOptions requestOptions = null)
         {
             var url = string.Format(CARDS_PATH, createCardRequest.CustomerId);
             return await SendRequest<Card>(HttpMethod.Post, url, createCardRequest, requestOptions);
@@ -224,13 +179,7 @@ namespace Shift4
             return await SendRequest<Card>(HttpMethod.Get, url);
         }
 
-        public async Task<Card> UpdateCard(CardUpdateRequest updateCard)
-        {
-            var url = string.Format(CARDS_PATH, updateCard.CustomerId) + "/" + updateCard.CardId;
-            return await SendRequest<Card>(HttpMethod.Post, url, updateCard);
-        }
-
-        public async Task<Card> UpdateCard(CardUpdateRequest updateCard, RequestOptions requestOptions)
+        public async Task<Card> UpdateCard(CardUpdateRequest updateCard, RequestOptions requestOptions = null)
         {
             var url = string.Format(CARDS_PATH, updateCard.CustomerId) + "/" + updateCard.CardId;
             return await SendRequest<Card>(HttpMethod.Post, url, updateCard, requestOptions);
@@ -258,12 +207,7 @@ namespace Shift4
 
         #region PaymentMethods
 
-        public async Task<PaymentMethod> CreatePaymentMethod(PaymentMethodRequest createPaymentMethodRequest)
-        {
-            return await SendRequest<PaymentMethod>(HttpMethod.Post, PAYMENT_METHODS_PATH, createPaymentMethodRequest);
-        }
-
-        public async Task<PaymentMethod> CreatePaymentMethod(PaymentMethodRequest createPaymentMethodRequest, RequestOptions requestOptions)
+        public async Task<PaymentMethod> CreatePaymentMethod(PaymentMethodRequest createPaymentMethodRequest, RequestOptions requestOptions = null)
         {
             return await SendRequest<PaymentMethod>(HttpMethod.Post, PAYMENT_METHODS_PATH, createPaymentMethodRequest, requestOptions);
         }
@@ -287,12 +231,7 @@ namespace Shift4
 
         #region plans
 
-        public async Task<Plan> CreatePlan(PlanRequest createPlanRequest)
-        {
-            return await SendRequest<Plan>(HttpMethod.Post, PLANS_PATH, createPlanRequest);
-        }
-
-        public async Task<Plan> CreatePlan(PlanRequest createPlanRequest, RequestOptions requestOptions)
+        public async Task<Plan> CreatePlan(PlanRequest createPlanRequest, RequestOptions requestOptions = null)
         {
             return await SendRequest<Plan>(HttpMethod.Post, PLANS_PATH, createPlanRequest, requestOptions);
         }
@@ -303,13 +242,7 @@ namespace Shift4
             return await SendRequest<Plan>(HttpMethod.Get, url);
         }
 
-        public async Task<Plan> UpdatePlan(PlanUpdateRequest updatePlanRequest)
-        {
-            var url = string.Format("{0}/{1}", PLANS_PATH, updatePlanRequest.PlanId);
-            return await SendRequest<Plan>(HttpMethod.Post, url, updatePlanRequest);
-        }
-
-        public async Task<Plan> UpdatePlan(PlanUpdateRequest updatePlanRequest, RequestOptions requestOptions)
+        public async Task<Plan> UpdatePlan(PlanUpdateRequest updatePlanRequest, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}", PLANS_PATH, updatePlanRequest.PlanId);
             return await SendRequest<Plan>(HttpMethod.Post, url, updatePlanRequest, requestOptions);
@@ -335,12 +268,7 @@ namespace Shift4
 
         #region subscriptions
 
-        public async Task<Subscription> CreateSubscription(SubscriptionRequest createSubscriptionRequest)
-        {
-            return await SendRequest<Subscription>(HttpMethod.Post, SUBSCRIPTIONS_PATH, createSubscriptionRequest);
-        }
-
-        public async Task<Subscription> CreateSubscription(SubscriptionRequest createSubscriptionRequest, RequestOptions requestOptions)
+        public async Task<Subscription> CreateSubscription(SubscriptionRequest createSubscriptionRequest, RequestOptions requestOptions = null)
         {
             return await SendRequest<Subscription>(HttpMethod.Post, SUBSCRIPTIONS_PATH, createSubscriptionRequest, requestOptions);
         }
@@ -351,13 +279,7 @@ namespace Shift4
             return await SendRequest<Subscription>(HttpMethod.Get, url);
         }
 
-        public async Task<Subscription> UpdateSubscription(SubscriptionUpdateRequest updateSubscriptionRequest)
-        {
-            var url = SUBSCRIPTIONS_PATH + "/" + updateSubscriptionRequest.SubscriptionId;
-            return await SendRequest<Subscription>(HttpMethod.Post, url, updateSubscriptionRequest);
-        }
-
-        public async Task<Subscription> UpdateSubscription(SubscriptionUpdateRequest updateSubscriptionRequest, RequestOptions requestOptions)
+        public async Task<Subscription> UpdateSubscription(SubscriptionUpdateRequest updateSubscriptionRequest, RequestOptions requestOptions = null)
         {
             var url = SUBSCRIPTIONS_PATH + "/" + updateSubscriptionRequest.SubscriptionId;
             return await SendRequest<Subscription>(HttpMethod.Post, url, updateSubscriptionRequest, requestOptions);
@@ -403,12 +325,7 @@ namespace Shift4
 
         #region blacklists
 
-        public async Task<BlacklistRule> CreateBlacklistRule(BlacklistRuleRequest request)
-        {
-            return await SendRequest<BlacklistRule>(HttpMethod.Post, BLACKLIST_RULE_PATH, request);
-        }
-
-        public async Task<BlacklistRule> CreateBlacklistRule(BlacklistRuleRequest request, RequestOptions requestOptions)
+        public async Task<BlacklistRule> CreateBlacklistRule(BlacklistRuleRequest request, RequestOptions requestOptions = null)
         {
             return await SendRequest<BlacklistRule>(HttpMethod.Post, BLACKLIST_RULE_PATH, request, requestOptions);
         }
@@ -457,12 +374,7 @@ namespace Shift4
             return await SendListRequest<Credit>(HttpMethod.Get, CREDITS_PATH);
         }
 
-        public async Task<Credit> CreateCredit(CreditRequest request)
-        {
-            return await SendRequest<Credit>(HttpMethod.Post, CREDITS_PATH, request);
-        }
-
-        public async Task<Credit> CreateCredit(CreditRequest request, RequestOptions requestOptions)
+        public async Task<Credit> CreateCredit(CreditRequest request, RequestOptions requestOptions = null)
         {
             return await SendRequest<Credit>(HttpMethod.Post, CREDITS_PATH, request, requestOptions);
         }
@@ -473,13 +385,7 @@ namespace Shift4
             return await SendRequest<Credit>(HttpMethod.Get, url);
         }
 
-        public async Task<Credit> UpdateCredit(CreditUpdateRequest updateRequest)
-        {
-            var url = CREDITS_PATH + "/" + updateRequest.CreditId;
-            return await SendRequest<Credit>(HttpMethod.Post, url, updateRequest);
-        }
-
-        public async Task<Credit> UpdateCredit(CreditUpdateRequest updateRequest, RequestOptions requestOptions)
+        public async Task<Credit> UpdateCredit(CreditUpdateRequest updateRequest, RequestOptions requestOptions = null)
         {
             var url = CREDITS_PATH + "/" + updateRequest.CreditId;
             return await SendRequest<Credit>(HttpMethod.Post, url, updateRequest, requestOptions);
@@ -504,25 +410,13 @@ namespace Shift4
             return await SendListRequest<Dispute>(HttpMethod.Get, DISPUTES_PATH);
         }
 
-        public async Task<Dispute> UpdateDispute(DisputeUpdateRequest request)
-        {
-            var url = string.Format("{0}/{1}", DISPUTES_PATH, request.DisputeId);
-            return await SendRequest<Dispute>(HttpMethod.Post, url, request);
-        }
-
-        public async Task<Dispute> UpdateDispute(DisputeUpdateRequest request, RequestOptions requestOptions)
+        public async Task<Dispute> UpdateDispute(DisputeUpdateRequest request, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}", DISPUTES_PATH, request.DisputeId);
             return await SendRequest<Dispute>(HttpMethod.Post, url, request, requestOptions);
         }
 
-        public async Task<Dispute> CloseDispute(string id)
-        {
-            var url = string.Format("{0}/{1}/close", DISPUTES_PATH,id);
-            return await SendRequest<Dispute>(HttpMethod.Post, url);
-        }
-
-        public async Task<Dispute> CloseDispute(string id, RequestOptions requestOptions)
+        public async Task<Dispute> CloseDispute(string id, RequestOptions requestOptions = null)
         {
             var url = string.Format("{0}/{1}/close", DISPUTES_PATH,id);
             return await SendRequest<Dispute>(HttpMethod.Post, url, requestOptions);
@@ -564,12 +458,7 @@ namespace Shift4
             return await SendListRequest<Payout>(HttpMethod.Get, PAYOUTS_PATH, request);
         }
 
-        public async Task<Payout> CreatePayout()
-        {
-            return await SendRequest<Payout>(HttpMethod.Post, PAYOUTS_PATH);
-        }
-
-        public async Task<Payout> CreatePayout(RequestOptions requestOptions)
+        public async Task<Payout> CreatePayout(RequestOptions requestOptions = null)
         {
             return await SendRequest<Payout>(HttpMethod.Post, PAYOUTS_PATH, requestOptions);
         }
