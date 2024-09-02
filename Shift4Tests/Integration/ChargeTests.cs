@@ -92,13 +92,19 @@ namespace Shift4Tests.Integration
             var customerRequest = _customerRequestBuilder.Build();
             var customer = await _gateway.CreateCustomer(customerRequest);
 
-            var cardRequestOption = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+            var cardRequestOption = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
             var cardRequest = _cardRequestBuilder.WithCustomerId(customer.Id).Build();
             var card = await _gateway.CreateCard(cardRequest, cardRequestOption);
             var sameCard = await _gateway.CreateCard(cardRequest, cardRequestOption);
 
             var chargeRequest = _chargeRequestBuilder.WithCustomerId(customer.Id).WithCard(_cardRequestBuilder.WithId(card.Id)).Build();
-            var chargeRequestOption = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+            var chargeRequestOption = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
             var charge = await _gateway.CreateCharge(chargeRequest, chargeRequestOption);
             var sameCharge = await _gateway.CreateCharge(chargeRequest, chargeRequestOption);
 

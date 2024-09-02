@@ -89,7 +89,10 @@ namespace Shift4Tests.Integration
                 }
             });
 
-            var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+            var requestOptions = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
 
             // when
             payout = await _gateway.CreatePayout(requestOptions);

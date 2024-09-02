@@ -74,7 +74,10 @@ namespace Shift4Tests.Integration
                     {"key" , "value"}
                 }
             };
-            var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+            var requestOptions = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
 
             var refund = await _gateway.CreateRefund(refundRequest, requestOptions);
             var sameRefund = await _gateway.CreateRefund(refundRequest, requestOptions);

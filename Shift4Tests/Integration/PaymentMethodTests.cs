@@ -38,7 +38,10 @@ namespace Shift4Tests.Integration
         {
             // given
             var request = CreatePaymentMethodRequest();
-            var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+            var requestOptions = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
 
             // when
             var created = await _gateway.CreatePaymentMethod(request, requestOptions);

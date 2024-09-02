@@ -58,7 +58,10 @@ namespace Shift4Tests.Integration
                 var cardRequest = _cardRequestBuilder.Build();
 
                 var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id,TrialEnd=DateTime.Now.AddDays(10), Card = cardRequest };
-                var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+                var requestOptions = new RequestOptions
+                {
+                    IdempotencyKey = TestUtils.IdempotencyKey()
+                };
                 var subscription = await _gateway.CreateSubscription(subscriptionRequest, requestOptions);
                 var sameSubscription = await _gateway.CreateSubscription(subscriptionRequest, requestOptions);
 

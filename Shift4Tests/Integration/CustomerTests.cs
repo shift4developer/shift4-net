@@ -40,7 +40,10 @@ namespace Shift4Tests.Integration
         {
             try
             {
-                var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+                var requestOptions = new RequestOptions
+                {
+                    IdempotencyKey = TestUtils.IdempotencyKey()
+                };
                 var customerRequest = _customerRequestBuilder.WithCard(_cardRequestBuilder).Build();
                 var customer = await _gateway.CreateCustomer(customerRequest, requestOptions);
                 var sameCustomer = await _gateway.CreateCustomer(customerRequest, requestOptions);

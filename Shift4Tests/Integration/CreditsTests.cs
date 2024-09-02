@@ -64,7 +64,10 @@ namespace Shift4Tests.Integration
                     Card = _cardRequestBuilder.WithId(token.Id).Build()
                 };
 
-                var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+                var requestOptions = new RequestOptions
+                {
+                    IdempotencyKey = TestUtils.IdempotencyKey()
+                };
                 var newCredit = await _gateway.CreateCredit(creditRequest, requestOptions);
                 var sameCredit = await _gateway.CreateCredit(creditRequest, requestOptions);
 
@@ -242,7 +245,10 @@ namespace Shift4Tests.Integration
                     Description = "new description"
                 };
 
-                var requestOptions = new RequestOptions().WithIdempotencyKey(TestUtils.IdempotencyKey());
+                var requestOptions = new RequestOptions
+                {
+                    IdempotencyKey = TestUtils.IdempotencyKey()
+                };
                 
                 var updatedCredit = await _gateway.UpdateCredit(creditUpdateRequest, requestOptions);
                 var sameUpdate = await _gateway.UpdateCredit(creditUpdateRequest, requestOptions);
