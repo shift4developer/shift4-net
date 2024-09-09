@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shift4Tests.Utils;
 
 namespace Shift4Tests.Integration
 {
@@ -31,8 +32,27 @@ namespace Shift4Tests.Integration
             Assert.Equal(request.Billing.Name, retrieved.Billing.Name);
             Assert.Equal(PaymentMethodStatus.Chargeable, retrieved.Status);
         }
+
         [Fact]
-        public async Task CreateApplePayPaymentMethod()
+        public async Task CreatePaymentMethodOnlyOnceWithIdempotencyKeyTest()
+        {
+            // given
+            var request = CreatePaymentMethodRequest();
+            var requestOptions = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
+
+            // when
+            var created = await _gateway.CreatePaymentMethod(request, requestOptions);
+            var sameCreated = await _gateway.CreatePaymentMethod(request, requestOptions);
+
+            // then
+            Assert.Equal(created.Id, sameCreated.Id);
+        }
+
+        [Fact]
+        public async Task CreateApplePayPaymentMethodTest()
         {
             // given
             var request = CreateApplePayPaymentMethodRequest();

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Shift4.Exception;
 using Shift4.Internal;
+using Shift4.Request;
 using Shift4.Response;
 using System;
 using System.Collections.Generic;
@@ -29,10 +30,15 @@ namespace Shift4
             _client.AddHeader("User-Agent", string.Format("Shift4-NET/{0}", _sdkVersion));
         }
 
-        public async Task<T> SendRequest<T>(HttpMethod method, string url, object parameter)
+        public async Task<T> SendRequest<T>(HttpMethod method, string url, object parameter, RequestOptions requestOptions = null)
         {
 
             HttpRequestMessage request = new HttpRequestMessage(method,url);
+            if (requestOptions != null && !String.IsNullOrEmpty(requestOptions.IdempotencyKey))
+            {
+                request.Headers.Add("Idempotency-Key", requestOptions.IdempotencyKey);
+            }
+
             if (parameter != null)
             {
                 var requestJson = JsonConvert.SerializeObject(parameter, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });

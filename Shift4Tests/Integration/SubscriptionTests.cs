@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Shift4.Internal;
+using Shift4Tests.Utils;
 
 namespace Shift4Tests.Integration
 {
@@ -36,6 +37,35 @@ namespace Shift4Tests.Integration
 
                 customer = await _gateway.RetrieveCustomer(customer.Id);
                 Assert.Equal(cardRequest.CardholderName, customer.Cards.First(c => c.Id == customer.DefaultCardId).CardholderName);
+
+            }
+            catch (Shift4Exception exc)
+            {
+                HandleApiException(exc);
+            }
+        }
+
+        [Fact]
+        public async Task SubscribeWithNewCardOnlyOnceWithIdempotencyKeyTest()
+        {
+            try
+            {
+                var plan = await _gateway.CreatePlan(_planRequestBuilder.Build());
+
+                var customerRequest = _customerRequestBuilder.Build();
+                var customer = await _gateway.CreateCustomer(customerRequest);
+
+                var cardRequest = _cardRequestBuilder.Build();
+
+                var subscriptionRequest = new SubscriptionRequest() { CustomerId = customer.Id, PlanId = plan.Id,TrialEnd=DateTime.Now.AddDays(10), Card = cardRequest };
+                var requestOptions = new RequestOptions
+                {
+                    IdempotencyKey = TestUtils.IdempotencyKey()
+                };
+                var subscription = await _gateway.CreateSubscription(subscriptionRequest, requestOptions);
+                var sameSubscription = await _gateway.CreateSubscription(subscriptionRequest, requestOptions);
+
+                Assert.Equal(subscription.Id, sameSubscription.Id);
 
             }
             catch (Shift4Exception exc)

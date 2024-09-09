@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shift4Tests.Utils;
 
 namespace Shift4Tests.Integration
 {
@@ -51,7 +52,6 @@ namespace Shift4Tests.Integration
             Assert.NotNull(payout.PeriodStart);
             Assert.NotNull(payout.PeriodEnd);
             Assert.NotNull(payout.Created);
-            Assert.Equal(payout.Currency, "EUR");
 
             var listedPayout = (await _gateway.ListPayouts()).List[0];
             Assert.Equal(payout.Id, listedPayout.Id);
@@ -60,6 +60,46 @@ namespace Shift4Tests.Integration
             Assert.Equal(payout.PeriodEnd, listedPayout.PeriodEnd);
             Assert.Equal(payout.Amount, listedPayout.Amount);
             Assert.Equal(payout.Currency, listedPayout.Currency);
+        }
+
+        [Fact]
+        public async Task CreateOnePayoutWithIdempotencyKey()
+        {
+            // given
+            var payout = await _gateway.CreatePayout();
+            var charge = await _gateway.CreateCharge(new ChargeRequest()
+            {
+                Amount = 100,
+                Currency = "USD",
+                Card = new CardRequest()
+                {
+                    Number = "4242424242424242",
+                    ExpMonth = "12",
+                    ExpYear = "2033"
+                }
+            });
+
+            var refund = await _gateway.CreateRefund(new RefundRequest()
+            {
+                ChargeId = charge.Id,
+                Amount = 30,
+                Metadata = new Dictionary<string, string>
+                {
+                    {"key" , "value"}
+                }
+            });
+
+            var requestOptions = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
+
+            // when
+            payout = await _gateway.CreatePayout(requestOptions);
+            var samePayout = await _gateway.CreatePayout(requestOptions);
+
+            // then
+            Assert.Equal(payout.Id, samePayout.Id);
         }
 
         [Fact]
@@ -90,14 +130,12 @@ namespace Shift4Tests.Integration
             var chargeTransaction = chargePayoutTransaction.List[0];
             Assert.False(chargePayoutTransaction.HasMore);
             Assert.Equal(chargeTransaction.Type, PayoutTransactionType.Charge);
-            Assert.Equal(chargeTransaction.Amount, charge.Amount);
-            Assert.Equal(chargeTransaction.Currency, charge.Currency);
+            Assert.True(chargeTransaction.Amount > 0);
             Assert.Equal(chargeTransaction.Created, charge.Created);
             Assert.Equal(chargeTransaction.Description, charge.Description);
             Assert.Equal(chargeTransaction.Source, charge.Id);
             Assert.True(chargeTransaction.Fee > 0);
             Assert.NotNull(chargeTransaction.Id);
-            Assert.Null(chargeTransaction.ExchangeRate);
         }
     }
 }

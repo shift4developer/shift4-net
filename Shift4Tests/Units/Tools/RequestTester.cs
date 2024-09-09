@@ -37,7 +37,7 @@ namespace Shift4Tests.Units.Tools
             }
             catch { }
             var endpoint = expectedRequest.UseUploadEndpoint ? configMock.Object.GetUploadsUrl()  : configMock.Object.GetApiUrl();
-            apiClientMock.Verify<Task<TResponseType>>(api => api.SendRequest<TResponseType>(It.Is<HttpMethod>(method => method == expectedRequest.Method), It.Is<string>(action => action == endpoint +"/"+ expectedRequest.Action), It.Is<object>(obj=>obj==expectedRequest.Parameter)), Times.Once);
+            apiClientMock.Verify<Task<TResponseType>>(api => api.SendRequest<TResponseType>(It.Is<HttpMethod>(method => method == expectedRequest.Method), It.Is<string>(action => action == endpoint +"/"+ expectedRequest.Action), It.Is<object>(obj=>obj==expectedRequest.Parameter), null), Times.Once);
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shift4Tests.Utils;
 
 namespace Shift4Tests.Integration
 {
@@ -79,6 +80,38 @@ namespace Shift4Tests.Integration
 
             Assert.Equal(2000, charge.Amount);
             Assert.Equal(card.Id, charge.Card.Id);
+        }
+
+        /// <summary>
+        /// create only one card and charge existing card provided by cardId only once
+        /// </summary>
+        [Fact]
+        public async Task CreateOneCardAndChargeCardByIdOnlyOnceBecauseIdempotencyTest()
+        {
+
+            var customerRequest = _customerRequestBuilder.Build();
+            var customer = await _gateway.CreateCustomer(customerRequest);
+
+            var cardRequestOption = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
+            var cardRequest = _cardRequestBuilder.WithCustomerId(customer.Id).Build();
+            var card = await _gateway.CreateCard(cardRequest, cardRequestOption);
+            var sameCard = await _gateway.CreateCard(cardRequest, cardRequestOption);
+
+            var chargeRequest = _chargeRequestBuilder.WithCustomerId(customer.Id).WithCard(_cardRequestBuilder.WithId(card.Id)).Build();
+            var chargeRequestOption = new RequestOptions
+            {
+                IdempotencyKey = TestUtils.IdempotencyKey()
+            };
+            var charge = await _gateway.CreateCharge(chargeRequest, chargeRequestOption);
+            var sameCharge = await _gateway.CreateCharge(chargeRequest, chargeRequestOption);
+
+            Assert.Equal(2000, charge.Amount);
+            Assert.Equal(card.Id, charge.Card.Id);
+            Assert.Equal(card.Id, sameCard.Id);
+            Assert.Equal(charge.Id, sameCharge.Id);
         }
 
         /// <summary>
