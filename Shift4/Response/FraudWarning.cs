@@ -11,7 +11,7 @@ namespace Shift4.Response
 {
     public class FraudWarning : BaseResponse
     {
-        
+
         [JsonProperty("id")]
         public String Id { get; set; }
 

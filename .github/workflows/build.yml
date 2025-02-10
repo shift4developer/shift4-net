@@ -6,16 +6,18 @@ jobs:
 
   build:
     name: Build lib
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 3.1.x
       - name: Create NuGet package
         run: dotnet pack Shift4 -c Release
+        env:
+          DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
       - name: Upload NuGet package as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nuget-package
           path: Shift4/bin/Release/Shift4.*.nupkg
@@ -24,34 +26,40 @@ jobs:
 
   test:
     needs: build
+    strategy:
+      max-parallel: 1
+      matrix:
+        dotnetversion: [netcoreapp3.1, net6.0, netcoreapp7.0]
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
     name: Run tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
             3.1.x
             6.0.x
             7.0.x
       - name: Run tests
-        run: dotnet test
+        run: dotnet test -p:TargetFramework=${{ matrix.dotnetversion }}
+        env:
+          DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
 
   nuget-publish:
     if: startsWith(github.event.ref, 'refs/tags/v')
     needs: [build, test]
     name: Publish package to nuget.org
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     steps:
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 3.1.x
       - name: Download build artifacts
-        uses: actions/download-artifact@v3      
+        uses: actions/download-artifact@v4
         with:
           name: nuget-package
       - name: Publish package to nuget.org
@@ -62,9 +70,9 @@ jobs:
     if: startsWith(github.event.ref, 'refs/tags/v')
     needs: [build, test]
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: nuget-package
       - name: Create Release
