@@ -550,7 +550,7 @@ namespace Shift4
 
                 if (value != null && !IsIgnored(property))
                 {
-                    if (property.PropertyType.IsClass() && !(value is string))
+                    if (property.PropertyType.IsClass() && !(value is string) && !(value is Expand))
                     {
                         path.Append(GenerateGetPath(value, GetPropertyName(property)));
                     }
@@ -577,6 +577,10 @@ namespace Shift4
         private string GenerateGetSection(object value, PropertyInfo property, string parentName)
         {
             var propertyName = GetPropertyName(property);
+            if (value is Expand expand) {
+                return String.Join("&", expand.Paths.Select(path => "expand[]="+path));
+                
+            }
             if (parentName != null)
             {
                 var converterValue = ConvertValue(value);

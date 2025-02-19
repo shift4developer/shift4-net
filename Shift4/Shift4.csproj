@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Shift4</PackageId>
-    <Version>3.7.0</Version>
+    <Version>3.8.0</Version>
     <Authors>Shift4</Authors>
     <Copyright>©2024 Shift4. All rights reserved.</Copyright>
     <Company>Shift4</Company>
@@ -32,5 +32,10 @@
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
+
+    <PropertyGroup>
+      <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
+
 
 </Project>

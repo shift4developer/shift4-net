@@ -16,7 +16,7 @@ namespace Shift4.Response
 
         [JsonProperty("data")]
         [JsonConverter(typeof(EventDataConverter))]
-        public object Data { get; set; }
+        public BaseResponse Data { get; set; }
 
         [JsonProperty("log")]
         public string Log { get; set; }

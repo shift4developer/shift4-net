@@ -29,7 +29,8 @@ namespace Shift4.Response
         public string Currency { get; set; }
 
         [JsonProperty("source")]
-        public string Source { get; set; }
+        [JsonConverter(typeof(ExpandableConverter<BaseResponse>))]
+        public Expandable<BaseResponse> Source { get; set; }
 
         [JsonProperty("payout")]
         public string Payout { get; set; }
