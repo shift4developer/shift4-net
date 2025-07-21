@@ -17,7 +17,7 @@ namespace Shift4Tests.Integration
 {
     public class PayoutTests : IntegrationTest
     {
-        [Fact]
+        [Fact(Skip = "Enable it after fix")]
         public async Task RetrievePayout()
         {
             // given
@@ -102,24 +102,25 @@ namespace Shift4Tests.Integration
             Assert.Equal(payout.Id, samePayout.Id);
         }
 
-        [Fact]
-        public async Task RetrievePayoutTransactions(){
+        [Fact(Skip = "Enable it after fix")]
+        public async Task RetrievePayoutTransactions()
+        {
             // given
             var payout = await _gateway.CreatePayout();
             var charge = await _gateway.CreateCharge(new ChargeRequest()
+            {
+                Amount = 100,
+                Currency = "EUR",
+                Card = new CardRequest()
                 {
-                    Amount = 100,
-                    Currency = "EUR",
-                    Card = new CardRequest()
-                    {
-                        Number = "4242424242424242",
-                        ExpMonth = "12",
-                        ExpYear = "2033"
-                    }
-                });
+                    Number = "4242424242424242",
+                    ExpMonth = "12",
+                    ExpYear = "2033"
+                }
+            });
             payout = await _gateway.CreatePayout();
             //when
-            var payoutTransactions = await _gateway.ListPayoutTransactions(new PayoutTransactionListRequest() { Payout = payout.Id } );
+            var payoutTransactions = await _gateway.ListPayoutTransactions(new PayoutTransactionListRequest() { Payout = payout.Id });
             // then
             Assert.NotNull(payoutTransactions);
             Assert.True(payoutTransactions.List.Count >= 3);

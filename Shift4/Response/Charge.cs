@@ -92,6 +92,15 @@ namespace Shift4.Response
         [JsonProperty("billing")]
         public Billing Billing { get; set; }
 
+        [JsonProperty("avsCheck")]
+        public AvsCheck AvsCheck { get; set; }
+
+        [JsonProperty("aniCheck")]
+        public AniCheck AniCheck { get; set; }
+
+        [JsonProperty("cvvCheck")]
+        public CvvCheck CvvCheck { get; set; }
+
         [JsonProperty("threeDSecureInfo")]
         public ThreeDSecureInfo ThreeDSecureInfo { get; set; }
 
