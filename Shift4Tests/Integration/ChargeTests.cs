@@ -219,7 +219,7 @@ namespace Shift4Tests.Integration
 
             var charge = await _gateway.CreateCharge(chargeRequest);
 
-            Assert.Equal("unavailable", charge.AvsCheck.Result);
+            Assert.Equal(AvsCheckResult.Unavailable, charge.AvsCheck.Result);
         }
     }
 }
