@@ -112,7 +112,11 @@ namespace Shift4Tests.Integration
                 Type = PaymentMethodType.Alipay,
                 Billing = new Billing()
                 {
-                    Name = "Alice Cooper"
+                    Name = "Alice Cooper",
+                    Address = new Address()
+                    {
+                        CountryISOCode = "CN"
+                    }
                 }
             };
         }
