@@ -12,6 +12,7 @@ namespace Shift4Tests.ModelBuilders
         private string _customerId=null;
         private string _id=null;
         private string _cardNumber = "4242424242424242";
+        private string _cardholderName = "test cardholder";
 
         public CardRequestBuilder WithCustomerId(string id)
         {
@@ -37,6 +38,19 @@ namespace Shift4Tests.ModelBuilders
             return this;
         }
 
+        public CardRequestBuilder WithAniCheckCard()
+        {
+            _cardNumber = "4242000000000513";
+            _cardholderName = "Ani check";
+            return this;
+        }
+
+        public CardRequestBuilder WithAvsCheckCard()
+        {
+            _cardNumber = "4242000000000315";
+            return this;
+        }
+
         public CardRequestBuilder WithId(string id)
         {
             _id = id;
@@ -47,7 +61,7 @@ namespace Shift4Tests.ModelBuilders
         {
             if (string.IsNullOrEmpty(_id))
             {
-                return new CardRequest() { CustomerId = _customerId, Number = _cardNumber, ExpMonth = "12", ExpYear = GetCorrectCardExpiryYear(), Cvc = "123", CardholderName = "test cardholder" };
+                return new CardRequest() { CustomerId = _customerId, Number = _cardNumber, ExpMonth = "12", ExpYear = GetCorrectCardExpiryYear(), Cvc = "123", CardholderName = _cardholderName };
             }
             else
             {

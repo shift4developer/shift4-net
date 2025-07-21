@@ -52,7 +52,7 @@ namespace Shift4Tests.Integration
                 var customerRequest = _customerRequestBuilder.Build();
                 var customer = await _gateway.CreateCustomer(customerRequest);
 
-                var chargeRequest = _chargeRequestBuilder.WithCustomerId(customer.Id).WithCard(_cardRequestBuilder.WithWrongNumber()).Build(); 
+                var chargeRequest = _chargeRequestBuilder.WithCustomerId(customer.Id).WithCard(_cardRequestBuilder.WithWrongNumber()).Build();
                 var charge = await _gateway.CreateCharge(chargeRequest);
 
             }
@@ -161,6 +161,65 @@ namespace Shift4Tests.Integration
             {
                 Assert.Equal("3D Secure attempt is required.", exc.Error.Message);
             }
+        }
+
+        /// <summary>
+        /// check cvv check data presence
+        /// </summary>
+        [Fact]
+        public async Task CheckCvvCheckPresenceInResponse()
+        {
+            var customerRequest = _customerRequestBuilder.Build();
+            var customer = await _gateway.CreateCustomer(customerRequest);
+
+            var cardRequest = _cardRequestBuilder.WithCustomerId(customer.Id).Build();
+            var card = await _gateway.CreateCard(cardRequest);
+
+            var chargeRequest = _chargeRequestBuilder.WithCustomerId(customer.Id).WithCard(_cardRequestBuilder.WithId(card.Id)).Build();
+            var charge = await _gateway.CreateCharge(chargeRequest);
+
+            Assert.Equal(CvvCheckResult.Match, charge.CvvCheck.Result);
+        }
+
+        /// <summary>
+        /// check ani check data presence
+        /// </summary>
+        [Fact]
+        public async Task CheckAniCheckPresenceInResponse()
+        {
+            var customerRequest = _customerRequestBuilder.Build();
+            var customer = await _gateway.CreateCustomer(customerRequest);
+
+            var chargeRequest = _chargeRequestBuilder
+                                .WithAmount(0)
+                                .WithIsCaptured(false)
+                                .WithCustomerId(customer.Id)
+                                .WithCard(_cardRequestBuilder.WithAniCheckCard())
+                                .Build();
+
+            var charge = await _gateway.CreateCharge(chargeRequest);
+
+            Assert.Equal(AniCheckResult.FullMatch, charge.AniCheck.Result);
+        }
+
+        /// <summary>
+        /// check avs check data presence
+        /// </summary>
+        [Fact]
+        public async Task CheckAvsCheckPresenceInResponse()
+        {
+            var customerRequest = _customerRequestBuilder.Build();
+            var customer = await _gateway.CreateCustomer(customerRequest);
+
+            var chargeRequest = _chargeRequestBuilder
+                                .WithCustomerId(customer.Id)
+                                .WithCard(_cardRequestBuilder.WithAvsCheckCard())
+                                .WithBilling()
+                                .Build();
+
+            var charge = await _gateway.CreateCharge(chargeRequest);
+
+            Assert.Equal("unavailable", charge.AvsCheck.Result);
         }
     }
 }
