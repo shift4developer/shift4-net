@@ -33,5 +33,11 @@ namespace Shift4.Response
         [JsonProperty("blacklistRuleId")]
         public string BlacklistRuleId { get; set; }
 
+        [JsonProperty("adviceCode")]
+        [JsonConverter(typeof(SafeEnumConverter))]
+        public AdviceCode? AdviceCode { get; set; }
+
+        [JsonProperty("networkAdviceCode")]
+        public string NetworkAdviceCode { get; set; }
     }
 }
