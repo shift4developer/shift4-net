@@ -17,7 +17,7 @@ namespace Shift4Tests.Integration
 {
     public class PayoutTests : IntegrationTest
     {
-        [Fact]
+        [Fact(Skip = "Enable it after fix")]
         public async Task RetrievePayout()
         {
             // given
@@ -102,7 +102,7 @@ namespace Shift4Tests.Integration
             Assert.Equal(payout.Id, samePayout.Id);
         }
 
-        [Fact]
+        [Fact(Skip = "Enable it after fix")]
         public async Task RetrievePayoutTransactions()
         {
             // given

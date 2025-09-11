@@ -51,6 +51,12 @@ namespace Shift4Tests.ModelBuilders
             return this;
         }
 
+        public CardRequestBuilder WithProcessingErrorCard()
+        {
+            _cardNumber = "4024007114166316";
+            return this;
+        }
+
         public CardRequestBuilder WithId(string id)
         {
             _id = id;
