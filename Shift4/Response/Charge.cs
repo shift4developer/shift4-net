@@ -107,6 +107,12 @@ namespace Shift4.Response
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
 
+        [JsonProperty("adviceCode")]
+        public AdviceCode? AdviceCode { get; set; }
+
+        [JsonProperty("networkAdviceCode")]
+        public string NetworkAdviceCode { get; set; }
+
     }
 }
 

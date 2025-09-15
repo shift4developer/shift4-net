@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shift4Tests.Utils;
+using Shift4.Response;
 
 namespace Shift4Tests.Integration
 {
@@ -220,6 +221,37 @@ namespace Shift4Tests.Integration
             var charge = await _gateway.CreateCharge(chargeRequest);
 
             Assert.Equal(AvsCheckResult.Unavailable, charge.AvsCheck.Result);
+        }
+
+        /// <summary>
+        /// check advice code data presence
+        /// </summary>
+        [Fact]
+        public async Task CheckAdviceCodePresenceInErrorResponse()
+        {
+            var customerRequest = _customerRequestBuilder.Build();
+            var customer = await _gateway.CreateCustomer(customerRequest);
+
+            var chargeRequest = _chargeRequestBuilder
+                                .WithAmount(100)
+                                .WithCustomerId(customer.Id)
+                                .WithCard(_cardRequestBuilder.WithProcessingErrorCard())
+                                .Build();
+
+            try
+            {
+                await _gateway.CreateCharge(chargeRequest);
+            }
+            catch (Shift4Exception exc)
+            {
+                var error = exc.Error;
+                Assert.Equal(AdviceCode.DoNotTryAgain, error.AdviceCode);
+                Assert.Equal(null, error.NetworkAdviceCode);
+
+                var charge = await _gateway.RetrieveCharge(error.ChargeId);
+                Assert.Equal(AdviceCode.DoNotTryAgain, charge.AdviceCode);
+                Assert.Equal(null, charge.NetworkAdviceCode);
+            }
         }
     }
 }
