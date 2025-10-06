@@ -21,7 +21,7 @@ namespace Shift4Tests.Integration
         {
             var configProvider = new TestConfigurationProvider();
             var mimeMapper = new FileExtensionToMimeMapper();
-            var httpClient = new HttpClient();
+            var httpClient = new Shift4.Internal.HttpClient();
             var apiClient = new ApiClient(httpClient,configProvider, mimeMapper);
             var signService = new SignService(configProvider);
             _gateway = new Shift4Gateway(apiClient, configProvider, signService);
