@@ -246,11 +246,11 @@ namespace Shift4Tests.Integration
             {
                 var error = exc.Error;
                 Assert.Equal(AdviceCode.DoNotTryAgain, error.AdviceCode);
-                Assert.Equal(null, error.NetworkAdviceCode);
+                Assert.Null(error.NetworkAdviceCode);
 
                 var charge = await _gateway.RetrieveCharge(error.ChargeId);
                 Assert.Equal(AdviceCode.DoNotTryAgain, charge.AdviceCode);
-                Assert.Equal(null, charge.NetworkAdviceCode);
+                Assert.Null(charge.NetworkAdviceCode);
             }
         }
     }
