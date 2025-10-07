@@ -14,8 +14,8 @@ namespace Shift4.Request.Checkout
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
-        [JsonProperty("captured")]
-        public bool? Captured { get; set; }
+        [JsonProperty("capture")]
+        public bool? Capture { get; set; }
 
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
