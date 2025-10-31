@@ -101,6 +101,9 @@ namespace Shift4.Response
         [JsonProperty("cvvCheck")]
         public CvvCheck CvvCheck { get; set; }
 
+        [JsonProperty("schemeTransactionId")]
+        public string SchemeTransactionId { get; set; }
+
         [JsonProperty("threeDSecureInfo")]
         public ThreeDSecureInfo ThreeDSecureInfo { get; set; }
 
