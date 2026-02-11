@@ -1,8 +1,5 @@
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Shift4.Common;
 using Shift4.Enums;
 using Shift4.Converters;

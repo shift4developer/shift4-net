@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Shift4.Converters;
-using Shift4.Enums;
 using System;
 using System.Collections.Generic;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Shift4.Enums
 {
@@ -69,8 +65,14 @@ namespace Shift4.Enums
         [EnumMember(Value = "blocked")]
         Blocked,
 
+        [EnumMember(Value = "call_issuer")]
+        CallIssuer,
+
         [EnumMember(Value = "do_not_try_again")]
         DoNotTryAgain,
+
+        [EnumMember(Value = "closed_account")]
+        ClosedAccount,
 
         [EnumMember(Value = "expired_token")]
         ExpiredToken,
@@ -84,6 +86,14 @@ namespace Shift4.Enums
         [EnumMember(Value = "invalid_account")]
         InvalidAccount,
 
+        [EnumMember(Value = "offline_mode")]
+        OfflineMode,
+
+        [EnumMember(Value = "offline_mode_transaction_amount_exceeded_limit")]
+        OfflineModeTransactionAmountExceededLimit,
+
+        [EnumMember(Value = "offline_mode_max_amount_exceeded_limit")]
+        OfflineModeMaxAmountExceededLimit,
         /**
          * Used when received value can't be mapped to this enumeration.
          */

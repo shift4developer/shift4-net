@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Shift4.Common;
 using Shift4.Converters;
 using Shift4.Enums;

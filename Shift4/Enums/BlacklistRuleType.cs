@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Shift4.Enums
 {
@@ -10,6 +6,9 @@ namespace Shift4.Enums
     {
         [EnumMember(Value = "fingerprint")]
         Fingerprint,
+
+        [EnumMember(Value = "shipping")]
+        Shipping,
 
         [EnumMember(Value = "ip_address")]
         IpAddress,
@@ -22,6 +21,9 @@ namespace Shift4.Enums
 
         [EnumMember(Value = "email")]
         Email,
+
+        [EnumMember(Value = "email_domain")]
+        EmailDomain,
 
         [EnumMember(Value = "user_agent")]
         UserAgent,

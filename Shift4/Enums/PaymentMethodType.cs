@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace Shift4.Enums
 {
     public enum PaymentMethodType
     {
+        [EnumMember(Value = "ach")]
+        Ach,
+
         [EnumMember(Value = "alipay")]
         Alipay,
 
@@ -16,6 +15,9 @@ namespace Shift4.Enums
 
         [EnumMember(Value = "bancontact")]
         Bancontact,
+
+        [EnumMember(Value = "bitpay")]
+        BitPay,
 
         [EnumMember(Value = "blik")]
         Blik,
@@ -32,14 +34,23 @@ namespace Shift4.Enums
         [EnumMember(Value = "giropay")]
         Giropay,
 
+        [EnumMember(Value = "google_pay")]
+        GooglePay,
+
         [EnumMember(Value = "ideal")]
         Ideal,
+
+        [EnumMember(Value = "klarna_debit_risk")]
+        KlarnaDebitRisk,
 
         [EnumMember(Value = "latvianbanks")]
         Latvianbanks,
 
         [EnumMember(Value = "lithuanianbanks")]
         Lithuanianbanks,
+
+       [EnumMember(Value = "maxima")]
+        Maxima,
 
         [EnumMember(Value = "multibanco")]
         Multibanco,
@@ -49,6 +60,9 @@ namespace Shift4.Enums
 
         [EnumMember(Value = "p24")]
         P24,
+
+        [EnumMember(Value = "paypost")]
+        Paypost,
 
         [EnumMember(Value = "paysafecard")]
         Paysafecard,
@@ -62,6 +76,9 @@ namespace Shift4.Enums
         [EnumMember(Value = "payu")]
         Payu,
 
+        [EnumMember(Value = "perlas")]
+        Perlas,
+
         [EnumMember(Value = "poli")]
         Poli,
 
@@ -70,6 +87,12 @@ namespace Shift4.Enums
 
         [EnumMember(Value = "sofort")]
         Sofort,
+
+        [EnumMember(Value = "swish")]
+        Swish,
+
+       [EnumMember(Value = "three_d_secure")]
+        ThreeDSecure,
 
         [EnumMember(Value = "trustly")]
         Trustly,

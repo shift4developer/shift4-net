@@ -1,11 +1,8 @@
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Shift4.Converters;
 using Shift4.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Shift4.Response
 {
@@ -26,6 +23,7 @@ namespace Shift4.Response
         public String Currency { get; set; }
 
         [JsonProperty("interval")]
+        [JsonConverter(typeof(SafeEnumConverter))]
         public Interval Interval { get; set; }
 
         [JsonProperty("intervalCount")]

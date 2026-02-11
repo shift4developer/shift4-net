@@ -12,7 +12,7 @@ namespace Shift4.Converters
 {
     public class SafeEnumConverter : StringEnumConverter
     {
-        private string fallback = "Unrecognized";
+        private readonly string fallback = "Unrecognized";
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (!objectType.IsEnumeration())
@@ -32,7 +32,7 @@ namespace Shift4.Converters
             }
             else
             {
-                return Enum.Parse(objectType, fallback,true);
+                return Enum.Parse(objectType, fallback, true);
             }
         }
     }
