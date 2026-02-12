@@ -91,9 +91,6 @@ namespace Shift4.Enums
         [EnumMember(Value = "swish")]
         Swish,
 
-       [EnumMember(Value = "three_d_secure")]
-        ThreeDSecure,
-
         [EnumMember(Value = "trustly")]
         Trustly,
 
