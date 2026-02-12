@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Shift4.Enums
 {
@@ -10,6 +6,9 @@ namespace Shift4.Enums
     {
         [EnumMember(Value="fraudulent")]
         Fraudulent,
+
+        [EnumMember(Value="expired")]
+        Expired,
 
         // Used when received value can't be mapped to this enumeration.
         Unrecognized

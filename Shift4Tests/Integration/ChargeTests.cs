@@ -1,16 +1,10 @@
 ﻿using Xunit;
-using Shift4.Common;
 using Shift4.Enums;
 using Shift4.Exception;
 using Shift4.Request;
 using Shift4Tests.ModelBuilders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Shift4Tests.Utils;
-using Shift4.Response;
 
 namespace Shift4Tests.Integration
 {

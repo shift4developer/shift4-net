@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 namespace Shift4.Enums
 {
 
     public enum Interval
     {
+        [EnumMember(Value = "hour")]
+        Hour,
         [EnumMember(Value = "day")]
         Day,
         [EnumMember(Value = "week")]

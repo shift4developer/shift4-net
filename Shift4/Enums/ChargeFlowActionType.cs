@@ -1,13 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace Shift4.Enums
 {
     public enum  ChargeFlowActionType
     {
+
+        [EnumMember(Value = "app_redirect")]
+        AppRedirect,
+
+        [EnumMember(Value = "qr_code")]
+        QrCode,
+
+        [EnumMember(Value = "mobile_app_confirmation")]
+        MobileAppConfirmation,
+
         [EnumMember(Value = "redirect")]
         Redirect,
 

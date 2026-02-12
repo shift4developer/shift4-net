@@ -69,6 +69,9 @@ namespace Shift4.Enums
         [EnumMember(Value = "blocked")]
         Blocked,
 
+        [EnumMember(Value = "call_issuer")]
+        CallIssuer,
+
         [EnumMember(Value = "do_not_try_again")]
         DoNotTryAgain,
 

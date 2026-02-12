@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+
 namespace Shift4.Response
 {
     public class Shift4List

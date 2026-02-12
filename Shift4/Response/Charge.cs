@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using Shift4.Common;
 using Shift4.Converters;
 using Shift4.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Shift4.Response
 {
@@ -111,6 +107,7 @@ namespace Shift4.Response
         public Dictionary<String, String> Metadata { get; set; }
 
         [JsonProperty("adviceCode")]
+        [JsonConverter(typeof(SafeEnumConverter))]
         public AdviceCode? AdviceCode { get; set; }
 
         [JsonProperty("networkAdviceCode")]
