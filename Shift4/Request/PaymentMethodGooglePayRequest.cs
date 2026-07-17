@@ -1,0 +1,10 @@
+using Newtonsoft.Json;
+
+namespace Shift4.Request
+{
+    public class PaymentMethodGooglePayRequest : BaseRequest
+    {
+        [JsonProperty("token")]
+        public string Token { get; set; }
+    }
+}

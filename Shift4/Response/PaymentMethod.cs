@@ -38,6 +38,9 @@ namespace Shift4.Response
         [JsonProperty("applePay")]
         public PaymentMethodApplePay ApplePay { get; set; }
 
+        [JsonProperty("googlePay")]
+        public PaymentMethodGooglePay GooglePay { get; set; }
+
         [JsonProperty("deleted")]
         public bool Deleted { get; set; }
     }

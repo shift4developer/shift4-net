@@ -121,6 +121,22 @@ namespace Shift4Tests.Integration
             };
         }
 
+        [Fact]
+        public async Task CreateGooglePayPaymentMethodTest()
+        {
+            // given
+            var request = CreateGooglePayPaymentMethodRequest();
+            // when
+            var created = await _gateway.CreatePaymentMethod(request);
+            // then
+            Assert.Equal(PaymentMethodType.GooglePay, created.Type);
+            Assert.NotNull(created.GooglePay);
+            Assert.True(created.GooglePay.CardBrand.HasValue);
+            Assert.True(created.GooglePay.CardType.HasValue);
+            Assert.NotNull(created.GooglePay.First6);
+            Assert.NotNull(created.GooglePay.Last4);
+        }
+
         private PaymentMethodRequest CreateApplePayPaymentMethodRequest()
         {
             return new PaymentMethodRequest()
@@ -129,6 +145,18 @@ namespace Shift4Tests.Integration
                 ApplePay = new PaymentMethodApplePayRequest()
                 {
                     Token = "TEST_TOKEN:100EUR"
+                }
+            };
+        }
+
+        private PaymentMethodRequest CreateGooglePayPaymentMethodRequest()
+        {
+            return new PaymentMethodRequest()
+            {
+                Type = PaymentMethodType.GooglePay,
+                GooglePay = new PaymentMethodGooglePayRequest()
+                {
+                    Token = "CRYPTOGRAM_3DS"
                 }
             };
         }
