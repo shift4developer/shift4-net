@@ -11,7 +11,7 @@ namespace Shift4.Request
         public String ChargeId { get;  set; }
 
         [JsonProperty("amount")]
-        public int? Amount { get; set; }
+        public long? Amount { get; set; }
 
         [JsonProperty("reason")]
         [JsonConverter(typeof(SafeEnumConverter))]

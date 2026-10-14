@@ -7,7 +7,7 @@ namespace Shift4.Request.Checkout
     public class CheckoutRequestCustomCharge
     {
         [JsonProperty("amountOptions")]
-        public List<int> AmountOptions { get; set; }
+        public List<long> AmountOptions { get; set; }
 
         [JsonProperty("customAmount")]
         public CustomAmount CustomAmount { get; set; }

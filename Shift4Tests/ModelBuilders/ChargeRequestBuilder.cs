@@ -12,7 +12,7 @@ namespace Shift4Tests.ModelBuilders
     {
         AddressBuilder _addressBuilder = new AddressBuilder();
 
-        int _amount=2000;
+        long _amount=2000;
         CardRequest _card;
         string _customerId;
         Shipping _shipping;
@@ -20,7 +20,7 @@ namespace Shift4Tests.ModelBuilders
         ThreeDSecure _threeDSecure;
         bool? _captured;
 
-        public ChargeRequestBuilder WithAmount(int amount)
+        public ChargeRequestBuilder WithAmount(long amount)
         {
             _amount = amount;
             return this;

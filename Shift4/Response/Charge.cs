@@ -21,10 +21,10 @@ namespace Shift4.Response
         public DateTime Created { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("amountRefunded")]
-        public int AmountRefunded { get; set; }
+        public long AmountRefunded { get; set; }
 
         [JsonProperty("currency")]
         public String Currency { get; set; }
