@@ -7,7 +7,7 @@ namespace Shift4.Request
     public class CreditRequest : BaseRequest
     {
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }

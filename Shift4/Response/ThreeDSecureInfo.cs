@@ -7,7 +7,7 @@ namespace Shift4.Response
     public class ThreeDSecureInfo
     {
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         /// <summary>
         /// Currency ISO Code

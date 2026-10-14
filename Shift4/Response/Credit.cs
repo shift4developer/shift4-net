@@ -18,7 +18,7 @@ namespace Shift4.Response
         public string ObjectType { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("currency")]
         public string Currency { get; set; }

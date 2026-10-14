@@ -12,7 +12,7 @@ namespace Shift4.Request
         public string Name { get; set; }
 
         [JsonProperty("amount")]
-        public int? Amount { get; set; }
+        public long? Amount { get; set; }
 
         /// <summary>
         /// Currency ISO code

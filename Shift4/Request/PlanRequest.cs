@@ -8,7 +8,7 @@ namespace Shift4.Request
     public class PlanRequest : BaseRequest
     {
         [JsonProperty("amount")]
-        public int? Amount { get;  set; }
+        public long? Amount { get;  set; }
 
         [JsonProperty("currency")]
         public String Currency { get; set; }

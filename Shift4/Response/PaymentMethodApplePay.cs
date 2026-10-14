@@ -17,7 +17,7 @@ namespace Shift4.Response
         public CardType? CardType { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonProperty("currency")]
         public String Currency { get; set; }
