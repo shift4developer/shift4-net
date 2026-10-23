@@ -54,5 +54,8 @@ namespace Shift4.Request
 
         [JsonProperty("metadata")]
         public Dictionary<String, String> Metadata { get; set; }
+
+        [JsonProperty("external")]
+        public ChargeRequestExternal External { get; set; }
     }
 }
