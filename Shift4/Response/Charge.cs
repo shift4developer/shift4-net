@@ -113,6 +113,12 @@ namespace Shift4.Response
         [JsonProperty("networkAdviceCode")]
         public string NetworkAdviceCode { get; set; }
 
+        [JsonProperty("external")]
+        public ChargeExternal External { get; set; }
+
+        [JsonProperty("networkToken")]
+        public NetworkTokenDetails NetworkToken { get; set; }
+
     }
 }
 
